@@ -7,10 +7,12 @@ public enum PlayerState
 {
 	Idle,
 	Moving,
+	PrepareAttack,
 	Shooting
 }
 public class PlayerData : MonoBehaviour
 {
+	[HideInInspector]
 	public PlayerState state;
 
 	private void Awake()
