@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _transform = transform;
         _playerData = GetComponent<PlayerData>();
-        _playerRotator = new PlayerRotator(_rotationSpeed, 4);
+        _playerRotator = new PlayerRotator(_rotationSpeed, _rotationSlower);
     }
     
     void Update()
