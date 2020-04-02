@@ -5,27 +5,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    private static ObjectPool _instance;
-    public ObjectPool Instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = this;
-            return _instance;
-        }
-    }
-
     private Dictionary<string, LinkedList<GameObject>> _objects = new Dictionary<string, LinkedList<GameObject>>();
-    
-    void Start()
-    {
-        if (_instance != null)
-            Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
-    }
-
-    GameObject GetGameObjectFromPool(GameObject prefab)
+    public GameObject GetGameObjectFromPool(GameObject prefab)
     {
         GameObject result;
         
@@ -46,7 +27,7 @@ public class ObjectPool : MonoBehaviour
         return result;
     }
 
-    void ReturnGameObjectToPool(GameObject gameObj)
+    public void ReturnGameObjectToPool(GameObject gameObj)
     {
         gameObj.SetActive(false);
         _objects[gameObj.name].AddFirst(gameObj);

@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState
+namespace Player
 {
-	Idle,
-	Moving,
-	PrepareAttack,
-	Shooting
-}
-public class PlayerData : MonoBehaviour
-{
-	[HideInInspector]
-	public PlayerState state;
-
-	private void Awake()
+	public enum PlayerState
 	{
-		state = PlayerState.Idle;
+		Idle,
+		Moving,
+		PrepareAttack,
+		Shooting,
+		Dying
+	}
+	public class PlayerData : MonoBehaviour
+	{
+		[HideInInspector]
+		public PlayerState state;
+
+		private void Awake()
+		{
+			state = PlayerState.Idle;
+		}
 	}
 }

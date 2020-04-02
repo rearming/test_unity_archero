@@ -36,7 +36,6 @@ public class PlayerAnimation : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("mouse click at: " + hit.point.ToString());
                 _enemyPos = hit.point;
                 _rotationCompleted = false;
             }
