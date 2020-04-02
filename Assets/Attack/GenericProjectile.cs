@@ -1,34 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Attack;
-using GenericSctipts;
+using GenericScripts;
 using UnityEngine;
 
 public class GenericProjectile : MonoBehaviour, IProjectile
 {
+    #pragma warning disable CS0108
     [SerializeField] protected Rigidbody rigidbody;
+    #pragma warning restore
     
     [SerializeField] protected float _damage;
     [SerializeField] protected float _speed;
 
     public virtual void StartFlight(Vector3 flightDir)
     {
-        Debug.Log("StartFlight on projectile not implemented!");
+        Debug.Log($"StartFlight() on {gameObject} not implemented!");
+    }
+
+    public virtual void DealDamage(LivingCreature target)
+    {
+        Debug.Log($"DealDamage() on {gameObject} not implemented!");
     }
     
-    public virtual void UpdateProjectileParams(float damage, float speed)
+    public virtual void OverrideProjectileParams(float damage, float speed)
     {
         _damage = damage;
         _speed = speed;
     }
     
-    public virtual void UpdateProjectileParams(float damage)
+    public virtual void OverrideProjectileParams(float damage)
     {
         _damage = damage;
     }
     
-    public virtual void DealDamage(LivingCreature target)
+    private void OnDisable()
     {
-        Debug.Log("DealDamage not implemented! (Call)");
+        ResetParams();
+    }
+    
+    private void ResetParams()
+    {
+        rigidbody.velocity = Vector3.zero;
     }
 }

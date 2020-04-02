@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GenericScripts;
 using Player;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,7 +9,7 @@ using UnityEngine.UIElements;
 public class PlayerAnimation : MonoBehaviour
 {
     private PlayerData _playerData;
-    private PlayerRotator _playerRotator;
+    private SmoothRotator _smoothRotator;
 
     private Animator _animator;
 
@@ -24,7 +25,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _transform = transform;
         _playerData = GetComponent<PlayerData>();
-        _playerRotator = new PlayerRotator(0.1f, 4);
+        _smoothRotator = new SmoothRotator(0.1f, 4);
     }
     
     void Update()
@@ -47,7 +48,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_rotationCompleted)
             return;
-        _transform.localEulerAngles = _playerRotator.SmoothLookAt(_transform.localEulerAngles.y,
+        _transform.localEulerAngles = _smoothRotator.SmoothLookAt(_transform.localEulerAngles.y,
             enemyPos - _transform.position, ref _rotationLerpValue);
         if (_rotationLerpValue > 1f)
         {

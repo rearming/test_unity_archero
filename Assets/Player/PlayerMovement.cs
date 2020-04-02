@@ -2,32 +2,26 @@
 using System.Collections.Generic;
  using Player;
  using UnityEngine;
+ using GenericScripts;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed;
-
     private Rigidbody _rigidbody;
     private Transform _transform;
 
     private Vector3 _currMovementDir;
     private Vector3 _prevMovementDir;
-    
-    [SerializeField] private float _rotationSpeed = 0.1f;
-    private float _rotationSlower = 4f;
 
     private float _rotationLerpValue;
     private bool _rotationComplete;
 
     private PlayerData _playerData;
-    private PlayerRotator _playerRotator;
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _transform = transform;
         _playerData = GetComponent<PlayerData>();
-        _playerRotator = new PlayerRotator(_rotationSpeed, _rotationSlower);
     }
     
     void Update()
@@ -35,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         UpdateMovementDir();
         UpdateMovementRotation();
         UpdatePlayerState();
-        _rigidbody.velocity = _currMovementDir * moveSpeed;
+        _rigidbody.velocity = _currMovementDir * +_playerData.moveSpeed;
     }
 
     void UpdatePlayerState()
@@ -57,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             _prevMovementDir = _currMovementDir;
         
         _transform.localEulerAngles =
-            _playerRotator.SmoothLookAt(_transform.localEulerAngles.y, _prevMovementDir, ref _rotationLerpValue);
+            _playerData.rotator.SmoothLookAt(_transform.localEulerAngles.y, _prevMovementDir, ref _rotationLerpValue);
 
         if (_rotationLerpValue > 1f)
         {

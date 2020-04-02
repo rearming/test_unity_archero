@@ -4,6 +4,6 @@ namespace Attack
 {
 	public interface IShooter
 	{
-		void Shoot(Vector3 targetDir);
+		void Shoot(Vector3 targetPos);
 	}
 }

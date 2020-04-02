@@ -1,4 +1,4 @@
-﻿using GenericSctipts;
+﻿using GenericScripts;
 using UnityEngine;
 
 namespace Attack
