@@ -1,76 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security;
-using GenericScripts;
-using Player;
+﻿using Attack;
+using Enemies;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+namespace Player
 {
-    private Transform _transform;
-    
-    private PlayerData _playerData;
-    private ShootingWeapon _shootingWeapon;
-    
-    [SerializeField] protected float attacksPerSecond;
-
-    private LinkedList<Vector3> _enemiesPositions = new LinkedList<Vector3>();
-
-    private float _timePast;
-    
-    private bool _rotationComplete;
-    private float _rotationLerpValue;
-    
-    void Awake()
+    public class PlayerShoot : MonoBehaviour
     {
-        GetEnemiesPositions();
-        _shootingWeapon = GetComponentInChildren<ShootingWeapon>();
-        _playerData = GetComponent<PlayerData>();
-        _transform = transform;
-    }
+        private Transform _transform;
+    
+        private PlayerData _playerData;
+        private ShootingWeapon _shootingWeapon;
+    
+        [SerializeField] protected float attacksPerSecond;
 
-    private void GetEnemiesPositions()
-    {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var enemy in enemies)
+        private float _timePast;
+    
+        private bool _rotationComplete;
+        private float _rotationLerpValue;
+    
+        private EnemySpawner _enemySpawner;
+    
+        void Awake()
         {
-            Debug.Log(enemy.name);
-            _enemiesPositions.AddFirst(enemy.GetComponentInChildren<Collider>().bounds.center);
+            _shootingWeapon = GetComponentInChildren<ShootingWeapon>();
+            _playerData = GetComponent<PlayerData>();
+            _transform = transform;
+
+            _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         }
-    }
-    
-    void Update()
-    {
-        if (_playerData.state == PlayerState.Idle)
-            RotateToEnemy();
-        if (_playerData.state == PlayerState.Moving)
-            _rotationComplete = false;
-        
-        if (_rotationComplete)
+
+        void Update()
         {
-            _timePast += Time.deltaTime;
-            if (_timePast >= attacksPerSecond)
+            if (_playerData.state == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
+                _rotationComplete = false;
+            if (!_rotationComplete && _playerData.state == PlayerState.Idle)
+                RotateToEnemy();
+        
+            if (_rotationComplete)
             {
-                _shootingWeapon.Shoot(_enemiesPositions.First.Value);
-                _timePast = 0f;
+                _timePast += Time.deltaTime;
+                if (_timePast >= attacksPerSecond)
+                {
+                    Vector3 closestEnemyPos;
+                    if (!_enemySpawner.GetClosestEnemyPosition(out closestEnemyPos))
+                        return;
+                    _shootingWeapon.Shoot(closestEnemyPos);
+                    _timePast = 0f;
+                }
             }
         }
-    }
 
-    void RotateToEnemy()
-    {
-        if (_rotationComplete)
-            return;
-        _transform.localEulerAngles = _playerData.rotator.SmoothLookAt(
-            _transform.localEulerAngles.y,
-            _enemiesPositions.First.Value - _transform.position,
-            ref _rotationLerpValue);
-        
-        if (_rotationLerpValue > 1f)
+        void RotateToEnemy()
         {
-            _playerData.state = PlayerState.Shooting;
-            _rotationComplete = true;
-            _rotationLerpValue = 0;
+            Vector3 closestEnemyPosition;
+            if (!_enemySpawner.GetClosestEnemyPosition(out closestEnemyPosition))
+                return;
+        
+            _transform.localEulerAngles = _playerData.rotator.SmoothLookAt(
+                _transform.localEulerAngles.y,
+                closestEnemyPosition - _transform.position,
+                ref _rotationLerpValue);
+        
+            if (_rotationLerpValue > 1f)
+            {
+                _playerData.state = PlayerState.Shooting;
+                _rotationComplete = true;
+                _rotationLerpValue = 0;
+            }
         }
     }
 }

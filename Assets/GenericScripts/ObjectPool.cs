@@ -1,44 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+namespace GenericScripts
 {
-    private static ObjectPool instance;
-
-    public static ObjectPool Instance => instance;
-
-    private void Awake()
+    public class ObjectPool : MonoBehaviour
     {
-        instance = this;
-    }
+        private static ObjectPool instance;
 
-    private Dictionary<string, LinkedList<GameObject>> _objects = new Dictionary<string, LinkedList<GameObject>>();
-    public GameObject GetGameObjectFromPool(GameObject prefab)
-    {
-        GameObject result;
-        
-        if (!_objects.ContainsKey(prefab.name))
-            _objects[prefab.name] = new LinkedList<GameObject>();
-        
-        if (_objects[prefab.name].Count > 0)
+        public static ObjectPool Instance => instance;
+
+        private void Awake()
         {
-            result = _objects[prefab.name].First.Value;
-            _objects[prefab.name].RemoveFirst();
-            result.SetActive(true);
+            instance = this;
+        }
+
+        private Dictionary<string, LinkedList<GameObject>> _objects = new Dictionary<string, LinkedList<GameObject>>();
+        public GameObject GetGameObjectFromPool(GameObject prefab)
+        {
+            GameObject result;
+        
+            if (!_objects.ContainsKey(prefab.name))
+                _objects[prefab.name] = new LinkedList<GameObject>();
+        
+            if (_objects[prefab.name].Count > 0)
+            {
+                result = _objects[prefab.name].First.Value;
+                _objects[prefab.name].RemoveFirst();
+                result.SetActive(true);
+                return result;
+            }
+            result = Instantiate(prefab);
+            result.name = prefab.name;
             return result;
         }
-        result = Instantiate(prefab);
-        result.name = prefab.name;
-        return result;
-    }
 
-    public void ReturnGameObjectToPool(GameObject gameObj)
-    {
-        gameObj.SetActive(false);
-        if (!_objects.ContainsKey(gameObj.name))
-            _objects[gameObj.name] = new LinkedList<GameObject>();
-        _objects[gameObj.name].AddFirst(gameObj);
+        public void ReturnGameObjectToPool(GameObject gameObj)
+        {
+            gameObj.SetActive(false);
+            if (!_objects.ContainsKey(gameObj.name))
+                _objects[gameObj.name] = new LinkedList<GameObject>();
+            _objects[gameObj.name].AddFirst(gameObj);
+        }
     }
 }

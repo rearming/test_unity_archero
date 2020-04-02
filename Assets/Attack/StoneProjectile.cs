@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using GenericScripts;
+﻿using GenericScripts;
 using UnityEngine;
 
-public class StoneProjectile : GenericProjectile
+namespace Attack
 {
-	public override void StartFlight(Vector3 flightDir)
+	public class StoneProjectile : GenericProjectile
 	{
-		rigidbody.AddForce(flightDir * _speed);
-	}
+		public override void StartFlight(Vector3 flightDir)
+		{
+			rigidbody.AddForce(flightDir * _speed);
+		}
 
-	private void OnTriggerEnter(Collider other)
-	{
-		DealDamage(other.gameObject.GetComponent<LivingCreature>());
-		ObjectPool.Instance.ReturnGameObjectToPool(gameObject);
-	}
+		private void OnTriggerEnter(Collider other)
+		{
+			DealDamage(other.gameObject.GetComponentInParent<LivingCreature>());
+			ObjectPool.Instance.ReturnGameObjectToPool(gameObject);
+		}
 
-	public override void DealDamage(LivingCreature target)
-	{
-		if (target != null)
-			target.TakeDamage(_damage);
+		public override void DealDamage(LivingCreature target)
+		{
+			if (target != null)
+				target.TakeDamage(_damage);
+		}
 	}
 }

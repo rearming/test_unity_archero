@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+namespace Enemies
 {
-    public virtual void Move()
+    public class EnemyMovement : MonoBehaviour
     {
-        Debug.Log($"Move() not implemented in {this}!");
+        public virtual void Move()
+        {
+            Debug.Log($"Move() not implemented in {this}!");
+        }
     }
 }

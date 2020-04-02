@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Enemies;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FlyingEnemyAnimation : MonoBehaviour
+namespace Enemies
 {
-    private EnemyData _enemyData;
-    
-    void Start()
+    public class FlyingEnemyAnimation : MonoBehaviour
     {
-        _enemyData = GetComponent<EnemyData>();
+        private EnemyData _enemyData;
+    
+        void Start()
+        {
+            _enemyData = GetComponent<EnemyData>();
+        }
     }
 }
