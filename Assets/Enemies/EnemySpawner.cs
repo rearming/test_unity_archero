@@ -11,7 +11,7 @@ namespace Enemies
         [SerializeField] protected GameObject[] enemyPrefabs;
         [SerializeField] protected Vector3[] hardcodedSpawnPositions;
     
-        private LinkedList<Tuple<GameObject, Vector3>> _enemies = new LinkedList<Tuple<GameObject, Vector3>>();
+        private LinkedList<Tuple<GameObject, Collider>> _enemies = new LinkedList<Tuple<GameObject, Collider>>();
         private int? _prevEnemyId;
         private int? _currEnemyId;
 
@@ -29,11 +29,10 @@ namespace Enemies
             int enemyIndex = Random.Range(0, enemyPrefabs.Length - 1);
             var newEnemy = ObjectPool.Instance.GetGameObjectFromPool(enemyPrefabs[index]);
             newEnemy.transform.parent = gameObject.transform;
-        
+            
             newEnemy.transform.position = hardcodedSpawnPositions[index];
-        
-            var enemyColliderCenter = newEnemy.transform.position + GetComponentInChildren<Collider>().bounds.center;
-            _enemies.AddFirst(new Tuple<GameObject, Vector3>(newEnemy, enemyColliderCenter));
+            
+            _enemies.AddFirst(new Tuple<GameObject, Collider>(newEnemy, newEnemy.GetComponentInChildren<Collider>()));
         }
     
         public bool GetClosestEnemyPosition(out Vector3 closestEnemyPos)
@@ -45,11 +44,12 @@ namespace Enemies
 
             foreach (var enemy in _enemies)
             {
-                var distance = (enemy.Item2 - _playerTransform.position).magnitude;
+                var enemyPos = enemy.Item2.bounds.center;
+                var distance = Vector3.Distance(enemyPos, _playerTransform.position);
                 if (distance < closestDistance && enemy.Item1.activeSelf)
                 {
                     closestDistance = distance;
-                    closestEnemyPos = enemy.Item2;
+                    closestEnemyPos = enemyPos;
                     closestEnemyExists = true;
                     closestEnemyId = enemy.Item1.GetInstanceID();
                 }

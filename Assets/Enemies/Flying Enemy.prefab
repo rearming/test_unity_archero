@@ -40,9 +40,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6558683061828558759}
   - component: {fileID: 6521293018325529785}
-  - component: {fileID: 1094607254716185327}
+  - component: {fileID: -6837464462217608056}
+  - component: {fileID: 2570744007953741791}
   - component: {fileID: 4269410529692344067}
-  - component: {fileID: 3204510898578550221}
+  - component: {fileID: 5416193639656963030}
   m_Layer: 0
   m_Name: Flying Enemy
   m_TagString: Enemy
@@ -83,7 +84,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &1094607254716185327
+--- !u!114 &-6837464462217608056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +93,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6561284288180807007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61e2006bbaf59664a9f9eb0200e7fccc, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a5b21b9e762083459acb28d17e1b274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reward: 5
+  state: 0
+  moveSpeed: 2
+--- !u!114 &2570744007953741791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561284288180807007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2338aac83c932bc4dbb6839493c9cb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 6
@@ -108,18 +124,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8bc0c82715de454da5757de723a9030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3204510898578550221
-MonoBehaviour:
+--- !u!95 &5416193639656963030
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6561284288180807007}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c28b0a35fa82348862b6e69768e39d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b86ba4d2d455d144999fe342af3611af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6561597936635398773
 GameObject:
   m_ObjectHideFlags: 0

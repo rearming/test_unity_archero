@@ -16,11 +16,21 @@ namespace Enemies
 	
 	public class EnemyData : MonoBehaviour
 	{
+		[SerializeField] protected int reward;
+	
 		[HideInInspector]
 		public EnemyState state;
+
+		public float moveSpeed;
+		
 		private void Awake()
 		{
 			state = EnemyState.Idle;
+		}
+
+		public int GetReward()
+		{
+			return reward;
 		}
 	}
 }

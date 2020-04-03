@@ -44,6 +44,7 @@ namespace Player
                     Vector3 closestEnemyPos;
                     if (!_enemySpawner.GetClosestEnemyPosition(out closestEnemyPos))
                         return;
+                    _playerData.state = PlayerState.Shooting;
                     _shootingWeapon.Shoot(closestEnemyPos);
                     _timePast = 0f;
                 }
@@ -63,7 +64,6 @@ namespace Player
         
             if (_rotationLerpValue > 1f)
             {
-                _playerData.state = PlayerState.Shooting;
                 _rotationComplete = true;
                 _rotationLerpValue = 0;
             }

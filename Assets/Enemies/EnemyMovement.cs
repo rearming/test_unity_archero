@@ -6,7 +6,7 @@ namespace Enemies
     {
         public virtual void Move()
         {
-            Debug.Log($"Move() not implemented in {this}!");
+            Debug.Log($"Move() not implemented in {gameObject}!");
         }
     }
 }

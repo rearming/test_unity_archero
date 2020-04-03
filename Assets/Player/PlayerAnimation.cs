@@ -25,34 +25,14 @@ namespace Player
             _playerData = GetComponent<PlayerData>();
             _smoothRotator = new SmoothRotator(0.1f, 4);
         }
-    
+
         void Update()
         {
             _animator.SetBool("Moving", _playerData.state == PlayerState.Moving);
-            if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    _enemyPos = hit.point;
-                    _rotationCompleted = false;
-                }
-            }
-            RotateToEnemy(_enemyPos);
-        }
-
-        void RotateToEnemy(Vector3 enemyPos)
-        {
-            if (_rotationCompleted)
-                return;
-            _transform.localEulerAngles = _smoothRotator.SmoothLookAt(_transform.localEulerAngles.y,
-                enemyPos - _transform.position, ref _rotationLerpValue);
-            if (_rotationLerpValue > 1f)
-            {
-                _rotationLerpValue = 0;
-                _rotationCompleted = true;
-            }
+            if (_playerData.state == PlayerState.Shooting)
+                _animator.SetTrigger("Shoot");
+            if (_playerData.state == PlayerState.Dying)
+                _animator.SetBool("IsDead", true);
         }
     }
 }

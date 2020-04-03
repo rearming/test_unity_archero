@@ -19,6 +19,8 @@ namespace Player
 		public override void TakeDamage(float damage)
 		{
 			_health -= damage;
+			if (_health <= 0)
+				Die();
 		}
 	
 		public override void Die()

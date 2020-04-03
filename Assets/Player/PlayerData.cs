@@ -10,7 +10,6 @@ namespace Player
 	{
 		Idle,
 		Moving,
-		PrepareAttack,
 		Shooting,
 		Dying
 	}
