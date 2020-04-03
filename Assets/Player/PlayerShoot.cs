@@ -29,6 +29,8 @@ namespace Player
 
         void Update()
         {
+            if (_playerData.state == PlayerState.Dead)
+                return;
             if (_playerData.state == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
                 _rotationComplete = false;
             if (!_rotationComplete && _playerData.state == PlayerState.Idle)
@@ -37,10 +39,9 @@ namespace Player
             if (_rotationComplete)
             {
                 _timePast += Time.deltaTime;
-                if (_timePast >= _shootingWeapon.attacksPerSecond)
+                if (_timePast >= 1f / _shootingWeapon.attacksPerSecond)
                 {
-                    Vector3 closestEnemyPos;
-                    if (!_enemySpawner.GetClosestEnemyPosition(out closestEnemyPos))
+                    if (!_enemySpawner.GetClosestEnemyPosition(out var closestEnemyPos))
                         return;
                     _playerData.state = PlayerState.Shooting;
                     _shootingWeapon.Shoot(closestEnemyPos);

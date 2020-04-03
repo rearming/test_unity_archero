@@ -25,7 +25,7 @@ namespace Player
 	
 		public override void Die()
 		{
-			_playerData.state = PlayerState.Dying;
+			_playerData.state = PlayerState.Dead;
 		}
 	}
 }

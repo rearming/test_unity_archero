@@ -28,11 +28,15 @@ namespace Player
 
         void Update()
         {
+            if (_playerData.state == PlayerState.Dead)
+            {
+                _animator.SetTrigger("Die");
+                return;
+            }
             _animator.SetBool("Moving", _playerData.state == PlayerState.Moving);
             if (_playerData.state == PlayerState.Shooting)
                 _animator.SetTrigger("Shoot");
-            if (_playerData.state == PlayerState.Dying)
-                _animator.SetBool("IsDead", true);
+            
         }
     }
 }

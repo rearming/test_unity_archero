@@ -11,7 +11,7 @@ namespace Player
 		Idle,
 		Moving,
 		Shooting,
-		Dying
+		Dead
 	}
 	public class PlayerData : MonoBehaviour
 	{

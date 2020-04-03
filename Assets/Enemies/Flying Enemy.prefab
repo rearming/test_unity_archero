@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: -6837464462217608056}
   - component: {fileID: 2570744007953741791}
   - component: {fileID: 5416193639656963030}
+  - component: {fileID: 3054395145343735126}
   m_Layer: 0
   m_Name: Flying Enemy
   m_TagString: Enemy
@@ -110,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2338aac83c932bc4dbb6839493c9cb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 6
+  _health: 15
 --- !u!95 &5416193639656963030
 Animator:
   serializedVersion: 3
@@ -130,6 +131,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3054395145343735126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561284288180807007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b888f61bc2818fd43a0d98b7bed87378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6561597936635398773
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,9 +348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideProjectileParams: 1
-  weaponDamage: 1
-  projectileSpeed: 10
-  attacksPerSecond: 0
+  weaponDamage: 3
+  projectileSpeed: 20
+  attacksPerSecond: 2
   projectilePrefab: {fileID: 8902660450392108212, guid: c7f0bc9272561574d8d0f9c95dc16000,
     type: 3}
   ownerCollider: {fileID: 7776746727596823735}

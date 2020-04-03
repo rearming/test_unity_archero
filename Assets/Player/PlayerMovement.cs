@@ -24,6 +24,8 @@ namespace Player
     
         void Update()
         {
+            if (_playerData.state == PlayerState.Dead)
+                return;
             UpdateMovementDir();
             UpdateMovementRotation();
             UpdatePlayerState();

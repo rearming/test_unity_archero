@@ -6,21 +6,18 @@ using UnityEngine;
 public class FlyingEnemyIdle : StateMachineBehaviour
 {
 	private ShootingWeapon _weapon;
-	private Transform _playerTransform;
 	private float _timePassed;
 	
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		_timePassed = 0f;
-		_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		_weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
 	}
 	
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-	    _timePassed += Time.deltaTime;
-	    animator.SetFloat("Distance", Vector3.Distance(animator.transform.position, _playerTransform.position));
-	    if (_timePassed > _weapon.attacksPerSecond)
+	{
+		_timePassed += Time.deltaTime;
+	    if (_timePassed >= 1 / _weapon.attacksPerSecond)
 	    {
 		    animator.SetTrigger("Shoot");
 	    }
