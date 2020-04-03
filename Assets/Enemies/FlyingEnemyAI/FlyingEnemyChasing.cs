@@ -15,6 +15,7 @@ public class FlyingEnemyChasing : StateMachineBehaviour
     
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+		animator.transform.LookAt(_playerTransform);
 		var rawTargetPosition = Vector3.MoveTowards(animator.transform.position,
 			_playerTransform.position, _enemyData.moveSpeed * Time.deltaTime);
 		animator.transform.position = new Vector3(rawTargetPosition.x, animator.gameObject.transform.position.y, rawTargetPosition.z);

@@ -2762,7 +2762,7 @@ CapsuleCollider:
   m_Radius: 0.76018476
   m_Height: 2.6212318
   m_Direction: 1
-  m_Center: {x: 0, y: 1.3262111, z: 0.0035862923}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!4 &992209800
 Transform:
   m_ObjectHideFlags: 0
@@ -2771,7 +2771,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992209798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.84, z: -10.31}
+  m_LocalPosition: {x: 0, y: 1.295, z: -10.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2094663060}
@@ -6218,7 +6218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bad0018eb9256e6409155981dd5af9a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bad0018eb9256e6409155981dd5af9a2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6357,7 +6357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideProjectileParams: 1
-  weaponDamage: 1
+  weaponDamage: 0
   projectileSpeed: 15
   attacksPerSecond: 1
   projectilePrefab: {fileID: 8902660450392108212, guid: ed2981bb53ccf3f41afc3c7806cfd883,
