@@ -6,7 +6,7 @@ namespace Attack
     public class GenericProjectile : MonoBehaviour, IProjectile
     {
         [HideInInspector]
-        public int ownerId;
+        public string ignoredTag;
 #pragma warning disable CS0108
         [SerializeField] protected Rigidbody rigidbody;
 #pragma warning restore

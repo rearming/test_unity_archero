@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6565007465669039845}
   m_Layer: 0
   m_Name: Bone003
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 6548930385338572225}
   m_Layer: 0
   m_Name: Bat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 6558534962519888353}
   m_Layer: 0
   m_Name: Bone002
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 7776746727596823735}
   m_Layer: 0
   m_Name: Bone001
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,8 +315,8 @@ GameObject:
   - component: {fileID: 1405999438905418930}
   - component: {fileID: 5455799873195263258}
   m_Layer: 0
-  m_Name: Weapon
-  m_TagString: Untagged
+  m_Name: Shooting Weapon
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,9 +348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideProjectileParams: 1
-  weaponDamage: 3
-  projectileSpeed: 20
-  attacksPerSecond: 2
+  weaponDamage: 2
+  projectileSpeed: 10
+  attacksPerSecond: 0.5
   projectilePrefab: {fileID: 8902660450392108212, guid: c7f0bc9272561574d8d0f9c95dc16000,
     type: 3}
-  ownerCollider: {fileID: 7776746727596823735}
+  ignoredTag: Enemy

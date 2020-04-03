@@ -12,7 +12,7 @@ namespace Attack
         [SerializeField] protected GameObject projectilePrefab;
 
         private Transform _weaponTransform;
-        [SerializeField] protected Collider ownerCollider; 
+        [SerializeField] protected string ignoredTag; 
 
         void Start()
         {
@@ -25,7 +25,7 @@ namespace Attack
             var projectileComponent = projectileObject.GetComponent<GenericProjectile>();
             
             projectileObject.transform.position = _weaponTransform.position;
-            projectileComponent.ownerId = ownerCollider.GetInstanceID();
+            projectileComponent.ignoredTag = ignoredTag;
             if (overrideProjectileParams)
                 projectileComponent.OverrideProjectileParams(weaponDamage, projectileSpeed);
             projectileComponent.StartFlight(targetPos - projectileObject.transform.position);

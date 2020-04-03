@@ -12,9 +12,11 @@ namespace Attack
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.GetInstanceID() == ownerId || other.isTrigger)
+			if (other.CompareTag(ignoredTag))
 				return;
-			DealDamage(other.gameObject.GetComponentInParent<LivingCreature>());
+			var target = other.gameObject.GetComponentInParent<LivingCreature>();
+			if (target != null)
+				DealDamage(target);
 			ObjectPool.Instance.ReturnGameObjectToPool(gameObject);
 		}
 
