@@ -12,6 +12,8 @@ namespace Attack
 
 		private void OnTriggerEnter(Collider other)
 		{
+			if (other.GetInstanceID() == ownerId || other.isTrigger)
+				return;
 			DealDamage(other.gameObject.GetComponentInParent<LivingCreature>());
 			ObjectPool.Instance.ReturnGameObjectToPool(gameObject);
 		}

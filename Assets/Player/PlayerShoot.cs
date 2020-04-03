@@ -10,8 +10,6 @@ namespace Player
     
         private PlayerData _playerData;
         private ShootingWeapon _shootingWeapon;
-    
-        [SerializeField] protected float attacksPerSecond;
 
         private float _timePast;
     
@@ -39,7 +37,7 @@ namespace Player
             if (_rotationComplete)
             {
                 _timePast += Time.deltaTime;
-                if (_timePast >= attacksPerSecond)
+                if (_timePast >= _shootingWeapon.attacksPerSecond)
                 {
                     Vector3 closestEnemyPos;
                     if (!_enemySpawner.GetClosestEnemyPosition(out closestEnemyPos))

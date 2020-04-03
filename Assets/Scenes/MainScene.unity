@@ -2787,7 +2787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc7fa26afb82394aa4076df26bb857c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacksPerSecond: 1
 --- !u!114 &992209806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6041,8 +6040,10 @@ MonoBehaviour:
   overrideProjectileParams: 1
   weaponDamage: 0
   projectileSpeed: 15
+  attacksPerSecond: 1
   projectilePrefab: {fileID: 8902660450392108212, guid: ed2981bb53ccf3f41afc3c7806cfd883,
     type: 3}
+  ownerCollider: {fileID: 0}
 --- !u!1001 &2112488230
 PrefabInstance:
   m_ObjectHideFlags: 0

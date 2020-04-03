@@ -7,7 +7,7 @@ public class FlyingEnemyChasing : StateMachineBehaviour
 {
 	[SerializeField] protected EnemyData _enemyData;
 	private Transform _playerTransform;
-	
+
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,8 +17,9 @@ public class FlyingEnemyChasing : StateMachineBehaviour
      // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		animator.transform.position = Vector3.MoveTowards(animator.transform.position,
+		var rawTargetPosition = Vector3.MoveTowards(animator.transform.position,
 			_playerTransform.position, _enemyData.moveSpeed * Time.deltaTime);
+		animator.transform.position = new Vector3(rawTargetPosition.x, animator.gameObject.transform.position.y, rawTargetPosition.z);
 		animator.SetFloat("Distance", Vector3.Distance(animator.transform.position, _playerTransform.position));
 	}
 

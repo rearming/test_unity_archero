@@ -3,28 +3,20 @@ using System.Collections.Generic;
 using Attack;
 using UnityEngine;
 
-public class FlyingEnemyIdle : StateMachineBehaviour
+public class FlyingEnemyShooting : StateMachineBehaviour
 {
-	private ShootingWeapon _weapon;
-	private Transform _playerTransform;
-	private float _timePassed;
-	
+	private ShootingWeapon _weapon; 
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		_timePassed = 0f;
-		_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		_weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
+		_weapon.Shoot(GameObject.FindGameObjectWithTag("Player").transform.position);
 	}
-	
-	public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-	    _timePassed += Time.deltaTime;
-	    animator.SetFloat("Distance", Vector3.Distance(animator.transform.position, _playerTransform.position));
-	    if (_timePassed > _weapon.attacksPerSecond)
-	    {
-		    animator.SetTrigger("Shoot");
-	    }
-    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
