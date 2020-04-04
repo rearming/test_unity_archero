@@ -19,13 +19,14 @@ namespace Player
 		public override void TakeDamage(float damage)
 		{
 			_health -= damage;
+			_playerData.State = PlayerState.GetHit;
 			if (_health <= 0)
 				Die();
 		}
 	
 		public override void Die()
 		{
-			_playerData.state = PlayerState.Dead;
+			_playerData.State = PlayerState.Dead;
 		}
 	}
 }

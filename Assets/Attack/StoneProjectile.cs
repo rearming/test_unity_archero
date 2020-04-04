@@ -12,7 +12,7 @@ namespace Attack
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag(ignoredTag))
+			if (other.CompareTag(ignoredTag) || other.isTrigger)
 				return;
 			var target = other.gameObject.GetComponentInParent<LivingCreature>();
 			if (target != null)

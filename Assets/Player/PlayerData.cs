@@ -11,12 +11,23 @@ namespace Player
 		Idle,
 		Moving,
 		Shooting,
+		GetHit,
 		Dead
 	}
 	public class PlayerData : MonoBehaviour
 	{
+		private PlayerState _prevState;
+		private PlayerState _state;
 		[HideInInspector]
-		public PlayerState state;
+		public PlayerState State
+		{
+			get => _state;
+			set
+			{
+				_prevState = _state;
+				_state = value;
+			}
+		}
 		
 		public float moveSpeed;
 		
@@ -28,7 +39,12 @@ namespace Player
 		private void Awake()
 		{
 			rotator = new SmoothRotator(rotationSpeed, rotationSlower);
-			state = PlayerState.Idle;
+			State = PlayerState.Idle;
+		}
+		
+		public PlayerState GetPrevState()
+		{
+			return _prevState;
 		}
 	}
 }

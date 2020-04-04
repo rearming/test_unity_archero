@@ -34,7 +34,6 @@ public class GroundEnemyChasing : StateMachineBehaviour
 	    Ray ray = new Ray(_raycastOrigin, _playerTransform.position - _raycastOrigin);
 	    if (Physics.Raycast(ray, out var hitInfo))
 	    {
-		    // Debug.Log(hitInfo.collider.name);
 		    if (hitInfo.collider.gameObject.CompareTag("Player"))
 			    animator.SetBool("IsChasing", false);
 	    }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GroundEnemyRangeAttack : StateMachineBehaviour
 {
+    private Transform _playerTransform;
+    
     private ShootingWeapon _weapon;
     private float _timePassed;
     private bool _shootDone;
@@ -17,9 +19,10 @@ public class GroundEnemyRangeAttack : StateMachineBehaviour
         if (!_componentsCached)
         {
             _weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
+            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             _componentsCached = true;
         }
-        _weapon.Shoot(GameObject.FindGameObjectWithTag("Player").transform.position);
+        _weapon.Shoot(_playerTransform.position);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

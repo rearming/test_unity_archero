@@ -5,6 +5,7 @@ using UnityEngine;
 public class GroundEnemyPrepareMeleeAttack : StateMachineBehaviour
 {
     private Transform _playerTransform;
+    
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;

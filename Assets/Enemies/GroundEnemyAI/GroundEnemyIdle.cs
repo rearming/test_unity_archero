@@ -29,8 +29,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 	    _transform.LookAt(_playerTransform);
-	    _timePassed += Time.deltaTime;
-	    
+
 	    Ray	ray = new Ray(_transform.position, _playerTransform.position - _transform.position);
 	    if (Physics.Raycast(ray, out var hitInfo))
 	    {
@@ -38,6 +37,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
 			    animator.SetBool("IsChasing", true);
 		    else
 		    {
+			    _timePassed += Time.deltaTime;
 			    var distance = animator.GetFloat("Distance");
 			    if (distance <= _meleeAttackDistance)
 				    animator.SetTrigger("Melee Attack");

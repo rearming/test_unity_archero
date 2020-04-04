@@ -28,13 +28,18 @@ namespace Player
 
         void Update()
         {
-            if (_playerData.state == PlayerState.Dead)
+            if (_playerData.State == PlayerState.GetHit)
+            {
+                _playerData.State = _playerData.GetPrevState();
+                _animator.SetTrigger("GetHit");
+            }
+            if (_playerData.State == PlayerState.Dead)
             {
                 _animator.SetTrigger("Die");
                 return;
             }
-            _animator.SetBool("Moving", _playerData.state == PlayerState.Moving);
-            if (_playerData.state == PlayerState.Shooting)
+            _animator.SetBool("Moving", _playerData.State == PlayerState.Moving);
+            if (_playerData.State == PlayerState.Shooting)
                 _animator.SetTrigger("Shoot");
             
         }

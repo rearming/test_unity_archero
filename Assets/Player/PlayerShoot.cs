@@ -29,11 +29,11 @@ namespace Player
 
         void Update()
         {
-            if (_playerData.state == PlayerState.Dead)
+            if (_playerData.State == PlayerState.Dead)
                 return;
-            if (_playerData.state == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
+            if (_playerData.State == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
                 _rotationComplete = false;
-            if (!_rotationComplete && _playerData.state == PlayerState.Idle)
+            if (!_rotationComplete && _playerData.State == PlayerState.Idle)
                 RotateToEnemy();
         
             if (_rotationComplete)
@@ -43,7 +43,7 @@ namespace Player
                 {
                     if (!_enemySpawner.GetClosestEnemyPosition(out var closestEnemyPos))
                         return;
-                    _playerData.state = PlayerState.Shooting;
+                    _playerData.State = PlayerState.Shooting;
                     _shootingWeapon.Shoot(closestEnemyPos);
                     _timePast = 0f;
                 }

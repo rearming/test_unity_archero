@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2570744007953741791}
   - component: {fileID: 5416193639656963030}
   - component: {fileID: 3054395145343735126}
+  - component: {fileID: 1891585487885712523}
   m_Layer: 0
   m_Name: Flying Enemy
   m_TagString: Enemy
@@ -97,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reward: 5
-  state: 0
   moveSpeed: 2
 --- !u!114 &2570744007953741791
 MonoBehaviour:
@@ -141,6 +141,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b888f61bc2818fd43a0d98b7bed87378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1891585487885712523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561284288180807007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c31d7b34b9bc464284e3774aa300895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6561597936635398773
@@ -268,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6564949175685168195}
   - component: {fileID: 7776746727596823735}
+  - component: {fileID: 1496435183285305040}
   m_Layer: 0
   m_Name: Bone001
   m_TagString: Enemy
@@ -304,6 +317,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.18543223
   m_Center: {x: -0.0679955, y: -0.0013963649, z: 0.005096211}
+--- !u!114 &1496435183285305040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561683430034749749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027cfe4444919b6438ac022827c1e84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoredTag: Enemy
+  damage: 5
 --- !u!1 &6622732118839190652
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +377,7 @@ MonoBehaviour:
   overrideProjectileParams: 1
   weaponDamage: 2
   projectileSpeed: 10
-  attacksPerSecond: 0.5
+  attacksPerSecond: 1
   projectilePrefab: {fileID: 8902660450392108212, guid: c7f0bc9272561574d8d0f9c95dc16000,
     type: 3}
   ignoredTag: Enemy

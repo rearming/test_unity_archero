@@ -3,9 +3,8 @@ using UnityEngine;
 
 namespace Attack
 {
-	public interface IProjectile
+	public interface IProjectile : IDamageArea
 	{
 		void StartFlight(Vector3 flightDir);
-		void DealDamage(LivingCreature target);
 	}
 }

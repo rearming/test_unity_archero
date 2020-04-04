@@ -24,7 +24,7 @@ namespace Player
     
         void Update()
         {
-            if (_playerData.state == PlayerState.Dead)
+            if (_playerData.State == PlayerState.Dead)
                 return;
             UpdateMovementDir();
             UpdateMovementRotation();
@@ -36,11 +36,11 @@ namespace Player
         {
             if (_currMovementDir != Vector3.zero)
             {
-                _playerData.state = PlayerState.Moving;
+                _playerData.State = PlayerState.Moving;
                 _rotationComplete = false;
             }
             else if (_rotationComplete)
-                _playerData.state = PlayerState.Idle;
+                _playerData.State = PlayerState.Idle;
         }
     
         void UpdateMovementRotation()
