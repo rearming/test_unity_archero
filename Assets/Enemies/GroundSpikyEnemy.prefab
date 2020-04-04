@@ -37,11 +37,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
-  m_Acceleration: 20
+  m_Speed: 3.5
+  m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 400
-  m_StoppingDistance: 1.5
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -73,6 +73,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b888f61bc2818fd43a0d98b7bed87378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &6946437670388721337
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2169870257201191428}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!135 &6198838485700055839
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -100,22 +116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoredTag: Enemy
   damage: 5
---- !u!54 &6946437670388721337
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169870257201191428}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!1 &5359441262108185297
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overrideProjectileParams: 1
   weaponDamage: 1
-  projectileSpeed: 10
-  attacksPerSecond: 1
+  projectileSpeed: 15
+  attacksPerSecond: 0.7
   projectilePrefab: {fileID: 8902660450392108212, guid: d21a81e49f849db4985241adbea2d962,
     type: 3}
   ignoredTag: Enemy

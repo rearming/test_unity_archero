@@ -20,8 +20,9 @@ namespace Enemies
         void Start()
         {
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            Spawn(0);
-            Spawn(1);
+
+            for (int i = 0; i < enemyPrefabs.Length; i++)
+                Spawn(i);
         }
 
         private void Spawn(int index) // TODO сделать нормальный спаун

@@ -37,6 +37,7 @@ namespace Player
         {
             if (_playerData.State == PlayerState.Dead || _stopShooting)
                 return;
+            
             if (_playerData.State == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
                 _rotationComplete = false;
             if (!_rotationComplete && _playerData.State == PlayerState.Idle)
@@ -55,7 +56,7 @@ namespace Player
                 }
             }
         }
-
+        
         void RotateToEnemy()
         {
             Vector3 closestEnemyPosition;

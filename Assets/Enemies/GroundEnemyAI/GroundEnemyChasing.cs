@@ -8,10 +8,11 @@ public class GroundEnemyChasing : StateMachineBehaviour
 {
 	private Transform _playerTransform;
 	private Vector3 _playerPosition;
-
-	private Vector3 _raycastOrigin;
+	
 	private NavMeshAgent _navMeshAgent;
-	private Transform _transform;
+	private Transform _weaponTransform;
+
+	private float _timePast;
 	
 	private bool _componentsCached;
 	
@@ -19,24 +20,26 @@ public class GroundEnemyChasing : StateMachineBehaviour
 	{
 		if (!_componentsCached)
 		{
-			_transform = animator.transform;
 			_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 			_navMeshAgent = animator.gameObject.GetComponent<NavMeshAgent>();
-			_raycastOrigin = animator.gameObject.GetComponentInChildren<ShootingWeapon>().gameObject.transform.position;
+			_weaponTransform = animator.gameObject.GetComponentInChildren<ShootingWeapon>().gameObject.transform;
 			_componentsCached = true;
 		}
 		_playerPosition = _playerTransform.position;
+		_navMeshAgent.SetDestination(_playerPosition);
 	}
 	
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-	    _transform.LookAt(_playerPosition);
-	    Ray ray = new Ray(_raycastOrigin, _playerTransform.position - _raycastOrigin);
+	    var raycastOrigin = _weaponTransform.position;
+	    Ray ray = new Ray(raycastOrigin, _playerTransform.position - raycastOrigin);
 	    if (Physics.Raycast(ray, out var hitInfo))
 	    {
 		    if (hitInfo.collider.gameObject.CompareTag("Player"))
+		    {
 			    animator.SetBool("IsChasing", false);
+			    _navMeshAgent.ResetPath();
+		    }
 	    }
-	    _navMeshAgent.SetDestination(_playerPosition);
     }
 }
