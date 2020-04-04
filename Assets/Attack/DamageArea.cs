@@ -21,7 +21,6 @@ public class DamageArea : MonoBehaviour, IDamageArea
 
     public void DealDamage(LivingCreature target)
     {
-        Debug.Log(target.name);
         target.TakeDamage(damage);
     }
 }

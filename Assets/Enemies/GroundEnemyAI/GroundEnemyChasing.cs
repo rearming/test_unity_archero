@@ -31,8 +31,9 @@ public class GroundEnemyChasing : StateMachineBehaviour
 	
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+	    HelpUnityCallOnStateEnter(animator, stateInfo, layerIndex);
 	    var raycastOrigin = _weaponTransform.position;
-	    Ray ray = new Ray(raycastOrigin, _playerTransform.position - raycastOrigin);
+	    var ray = new Ray(raycastOrigin, _playerTransform.position - raycastOrigin);
 	    if (Physics.Raycast(ray, out var hitInfo))
 	    {
 		    if (hitInfo.collider.gameObject.CompareTag("Player"))
@@ -40,6 +41,16 @@ public class GroundEnemyChasing : StateMachineBehaviour
 			    animator.SetBool("IsChasing", false);
 			    _navMeshAgent.ResetPath();
 		    }
+	    }
+    }
+
+    private void HelpUnityCallOnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+	    _timePast += stateInfo.length;
+	    if (_timePast >= stateInfo.length)
+	    {
+		    OnStateEnter(animator, stateInfo, layerIndex);
+		    _timePast = 0f;
 	    }
     }
 }

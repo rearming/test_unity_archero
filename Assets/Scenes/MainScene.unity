@@ -221,7 +221,7 @@ PrefabInstance:
     - target: {fileID: 108507113624698413, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.6
+      value: -4.11
       objectReference: {fileID: 0}
     - target: {fileID: 108507113624698413, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d,
         type: 3}
@@ -231,7 +231,7 @@ PrefabInstance:
     - target: {fileID: 108507113624698413, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.71
+      value: -9.58
       objectReference: {fileID: 0}
     - target: {fileID: 108507113624698413, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d,
         type: 3}
@@ -3212,7 +3212,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.21666665
+  m_VoxelSize: 0.33333334
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: c6ce15b717f42f14093ba5450c236454, type: 2}
 --- !u!4 &758749810
@@ -4582,10 +4582,13 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 2168957499752971956, guid: 83e960328d8c8674d860d25e48b16692, type: 3}
   - {fileID: 6561284288180807007, guid: 7049c3a57261f1043b86ac8f0a5caa79, type: 3}
+  - {fileID: 2168957499752971956, guid: 83e960328d8c8674d860d25e48b16692, type: 3}
+  - {fileID: 6561284288180807007, guid: 7049c3a57261f1043b86ac8f0a5caa79, type: 3}
   hardcodedSpawnPositions:
   - {x: 2, y: 2, z: -4}
   - {x: -5, y: 5, z: 0}
   - {x: -3, y: 2, z: 3}
+  - {x: -3, y: 5, z: 3}
 --- !u!4 &1119305115
 Transform:
   m_ObjectHideFlags: 0
