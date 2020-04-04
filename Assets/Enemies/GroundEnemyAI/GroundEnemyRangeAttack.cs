@@ -22,16 +22,14 @@ public class GroundEnemyRangeAttack : StateMachineBehaviour
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             _componentsCached = true;
         }
-        _weapon.Shoot(_playerTransform.position);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timePassed += Time.deltaTime;
-        if (_timePassed > stateInfo.length && !_shootDone)
+        if (_timePassed > stateInfo.length / 3 && !_shootDone)
         {
-            Debug.Log("shoot!");
-            // _weapon.Shoot(GameObject.FindGameObjectWithTag("Player").transform.position);
+            _weapon.Shoot(GameObject.FindGameObjectWithTag("Player").transform.position);
             _shootDone = true;
         }
     }

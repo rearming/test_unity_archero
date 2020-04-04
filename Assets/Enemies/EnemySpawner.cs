@@ -11,7 +11,7 @@ namespace Enemies
         [SerializeField] protected GameObject[] enemyPrefabs;
         [SerializeField] protected Vector3[] hardcodedSpawnPositions;
     
-        private LinkedList<Tuple<GameObject, Collider>> _enemies = new LinkedList<Tuple<GameObject, Collider>>();
+        private List<Tuple<GameObject, Collider>> _enemies = new List<Tuple<GameObject, Collider>>();
         private int? _prevEnemyId;
         private int? _currEnemyId;
 
@@ -32,7 +32,7 @@ namespace Enemies
             
             newEnemy.transform.position = hardcodedSpawnPositions[index];
             
-            _enemies.AddFirst(new Tuple<GameObject, Collider>(newEnemy, newEnemy.GetComponentInChildren<Collider>()));
+            _enemies.Add(new Tuple<GameObject, Collider>(newEnemy, newEnemy.GetComponentInChildren<Collider>()));
         }
     
         public bool GetClosestEnemyPosition(out Vector3 closestEnemyPos)
@@ -41,17 +41,22 @@ namespace Enemies
             closestEnemyPos = Vector3.negativeInfinity;
             bool closestEnemyExists = false;
             int? closestEnemyId = null;
+            
+            if (NoMoreEnemies())
+                return false;
 
-            foreach (var enemy in _enemies)
+            for (int i = _enemies.Count - 1; i >= 0; i--)
             {
-                var enemyPos = enemy.Item2.bounds.center;
+                if (RemoveEnemyIfDead(_enemies[i], i))
+                    continue;
+                var enemyPos = _enemies[i].Item2.bounds.center;
                 var distance = Vector3.Distance(enemyPos, _playerTransform.position);
-                if (distance < closestDistance && enemy.Item1.activeSelf)
+                if (distance < closestDistance)
                 {
                     closestDistance = distance;
                     closestEnemyPos = enemyPos;
                     closestEnemyExists = true;
-                    closestEnemyId = enemy.Item1.GetInstanceID();
+                    closestEnemyId = _enemies[i].Item1.GetInstanceID();
                 }
             }
             _prevEnemyId = _currEnemyId;
@@ -62,6 +67,25 @@ namespace Enemies
         public bool ClosestEnemyChanged()
         {
             return _prevEnemyId == null || _prevEnemyId != _currEnemyId;
+        }
+        
+        private bool NoMoreEnemies()
+        {
+            if (_enemies.Count == 0)
+            {
+                EventManager.Instance.PostNostrification(EVENT_TYPE.Win, this);
+                return true;
+            }
+            return false;
+        }
+        private bool RemoveEnemyIfDead(Tuple<GameObject, Collider> enemy, int i)
+        {
+            if (!enemy.Item1.activeSelf)
+            {
+                _enemies.RemoveAt(i);
+                return true;
+            }
+            return false;
         }
     }
 }

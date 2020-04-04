@@ -1,5 +1,6 @@
 ﻿using Attack;
 using Enemies;
+using GenericScripts;
 using UnityEngine;
 
 namespace Player
@@ -11,25 +12,30 @@ namespace Player
         private PlayerData _playerData;
         private ShootingWeapon _shootingWeapon;
 
+        private bool _stopShooting;
         private float _timePast;
-    
+
         private bool _rotationComplete;
         private float _rotationLerpValue;
     
         private EnemySpawner _enemySpawner;
-    
+
         void Awake()
         {
             _shootingWeapon = GetComponentInChildren<ShootingWeapon>();
             _playerData = GetComponent<PlayerData>();
             _transform = transform;
 
-            _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
+            _enemySpawner = FindObjectOfType<EnemySpawner>();
+            EventManager.Instance.AddListener(EVENT_TYPE.Win, (eventType, sender, o) =>
+            {
+                _stopShooting = eventType == EVENT_TYPE.Win;
+            });
         }
 
         void Update()
         {
-            if (_playerData.State == PlayerState.Dead)
+            if (_playerData.State == PlayerState.Dead || _stopShooting)
                 return;
             if (_playerData.State == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
                 _rotationComplete = false;
