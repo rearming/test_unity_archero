@@ -9,6 +9,8 @@ namespace GenericScripts
     {
         Win,
         Loose,
+        Pause,
+        Resume,
     };
 
     public class EventManager : MonoBehaviour
