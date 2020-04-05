@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using GenericScripts;
+using UnityEngine;
+using EventType = GenericScripts.EventType;
 
 namespace GameManager
 {
     public class GameData : MonoBehaviour
     {
-        private int _playerMoney;
+        public int PlayerMoney { get; private set; }
 
         public void SendReward(int reward)
         {
-            _playerMoney += reward;
-            Debug.Log($"Player owns {_playerMoney.ToString()} now");
+            PlayerMoney += reward;
+            EventManager.Instance.PostNostrification(EventType.SendReward, this);
         }
     }
 }

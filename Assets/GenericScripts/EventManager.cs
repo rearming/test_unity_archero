@@ -12,6 +12,7 @@ namespace GenericScripts
         Pause,
         Resume,
         PlayerHit,
+        SendReward
     };
 
     public class EventManager : MonoBehaviour

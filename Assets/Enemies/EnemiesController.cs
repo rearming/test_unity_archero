@@ -25,6 +25,8 @@ namespace Enemies
         [SerializeField] protected int groundEnemiesNumber;
         [SerializeField] protected float groundEnemySpawnHeight;
 
+        private int _spawnCellOffset;
+
         private List<Tuple<GameObject, Collider>> _enemies = new List<Tuple<GameObject, Collider>>();
         private int? _prevEnemyId;
         private int? _currEnemyId;
@@ -58,15 +60,18 @@ namespace Enemies
             _spawnBounds = _spawnBounds.OrderBy(item => Guid.NewGuid()).ToList();
         }
 
-        private void Spawn(GameObject enemyPrefab, int number, float spawnHeight)
+        private void Spawn(GameObject enemyPrefab, int enemiesNumber, float spawnHeight)
         {
-            for (int i = 0; i < number; i++)
+            for (int i = _spawnCellOffset; i < enemiesNumber + _spawnCellOffset; i++)
             {
+                if (i >= _spawnBounds.Count)
+                    return;
                 var newEnemy = ObjectPool.Instance.GetGameObjectFromPool(enemyPrefab);
                 newEnemy.transform.parent = gameObject.transform;
                 newEnemy.transform.position = new Vector3(_spawnBounds[i].center.x, spawnHeight, _spawnBounds[i].center.z);
                 _enemies.Add(new Tuple<GameObject, Collider>(newEnemy, newEnemy.GetComponentInChildren<Collider>()));
             }
+            _spawnCellOffset += enemiesNumber;
         }
     
         public bool GetClosestEnemyPosition(out Vector3 closestEnemyPos)

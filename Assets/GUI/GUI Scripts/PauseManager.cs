@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using GenericScripts;
@@ -7,6 +8,11 @@ using EventType = GenericScripts.EventType;
 
 public class PauseManager : MonoBehaviour
 {
+    public void Awake()
+    {
+        Time.timeScale = 0;
+    }
+
     public void Pause()
     {
         EventManager.Instance.PostNostrification(EventType.Pause, this);
