@@ -5,13 +5,13 @@ namespace GenericScripts
 {
     public class ObjectPool : MonoBehaviour
     {
-        private static ObjectPool instance;
+        private static ObjectPool _instance;
 
-        public static ObjectPool Instance => instance;
+        public static ObjectPool Instance => _instance;
 
         private void Awake()
         {
-            instance = this;
+            _instance = this;
         }
 
         private Dictionary<string, LinkedList<GameObject>> _objects = new Dictionary<string, LinkedList<GameObject>>();

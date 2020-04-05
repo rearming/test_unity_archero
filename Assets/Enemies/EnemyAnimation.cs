@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemies;
 using GenericScripts;
 using UnityEngine;
+using EventType = GenericScripts.EventType;
 
 public class EnemyAnimation : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class EnemyAnimation : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _enemyData = GetComponent<EnemyData>();
-        EventManager.Instance.AddListener(EVENT_TYPE.Loose, (type, sender, o) => _animator.SetTrigger("Win"));
+        EventManager.Instance.AddListener(EventType.Loose, (type, sender, o) => _animator.SetTrigger("Win"));
     }
     
     void Update()

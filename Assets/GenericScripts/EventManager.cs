@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace GenericScripts
 {
-    public enum EVENT_TYPE
+    public enum EventType
     {
         Win,
         Loose,
         Pause,
         Resume,
+        PlayerHit,
     };
 
     public class EventManager : MonoBehaviour
@@ -22,12 +23,12 @@ namespace GenericScripts
             Instance = this;
         }
 
-        public delegate void OnEvent(EVENT_TYPE eventType, Component sender, object param = null);
+        public delegate void OnEvent(EventType eventType, Component sender, object param = null);
 
-        private Dictionary<EVENT_TYPE, List<OnEvent>> 
-            _listeners = new Dictionary<EVENT_TYPE, List<OnEvent>>();
+        private Dictionary<EventType, List<OnEvent>> 
+            _listeners = new Dictionary<EventType, List<OnEvent>>();
         
-        public void AddListener(EVENT_TYPE eventType, OnEvent listener)
+        public void AddListener(EventType eventType, OnEvent listener)
         {
             if (_listeners.TryGetValue(eventType, out var listenList))
             {
@@ -40,7 +41,7 @@ namespace GenericScripts
             _listeners.Add(eventType, listenList);
         }
 
-        public void PostNostrification(EVENT_TYPE eventType, Component sender, object param = null)
+        public void PostNostrification(EventType eventType, Component sender, object param = null)
         {
             if (!_listeners.TryGetValue(eventType, out var listenList))
                 return;

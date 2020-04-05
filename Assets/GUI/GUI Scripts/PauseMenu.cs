@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using GenericScripts;
 using UnityEngine;
+using EventType = GenericScripts.EventType;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,13 +12,13 @@ public class PauseMenu : MonoBehaviour
     
     void Start()
     {
-        EventManager.Instance.AddListener(EVENT_TYPE.Pause, (type, sender, o) =>
+        EventManager.Instance.AddListener(EventType.Pause, (type, sender, o) =>
         {
             foreach (var pauseObject in showOnPauseObjects) pauseObject.SetActive(true);
             foreach (var pauseObject in hideOnPauseObjects) pauseObject.SetActive(false);
         });
         
-        EventManager.Instance.AddListener(EVENT_TYPE.Resume, (type, sender, o) =>
+        EventManager.Instance.AddListener(EventType.Resume, (type, sender, o) =>
         {
             foreach (var pauseObject in showOnPauseObjects) pauseObject.SetActive(false);
             foreach (var pauseObject in hideOnPauseObjects) pauseObject.SetActive(true);

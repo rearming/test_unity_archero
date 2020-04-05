@@ -7,7 +7,7 @@ namespace Attack
 	{
 		public override void StartFlight(Vector3 flightDir)
 		{
-			rigidbody.AddForce(flightDir * _speed);
+			rigidbody.AddForce(flightDir * speed);
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -23,7 +23,7 @@ namespace Attack
 		public override void DealDamage(LivingCreature target)
 		{
 			if (target != null)
-				target.TakeDamage(_damage);
+				target.TakeDamage(damage);
 		}
 	}
 }

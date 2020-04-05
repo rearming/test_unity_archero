@@ -2,6 +2,7 @@
 using Enemies;
 using GenericScripts;
 using UnityEngine;
+using EventType = GenericScripts.EventType;
 
 namespace Player
 {
@@ -27,9 +28,9 @@ namespace Player
             _transform = transform;
 
             _enemiesController = FindObjectOfType<EnemiesController>();
-            EventManager.Instance.AddListener(EVENT_TYPE.Win, (eventType, sender, o) =>
+            EventManager.Instance.AddListener(EventType.Win, (eventType, sender, o) =>
             {
-                _stopShooting = eventType == EVENT_TYPE.Win;
+                _stopShooting = eventType == EventType.Win;
             });
         }
 

@@ -4,6 +4,7 @@ using Attack;
 using GenericScripts;
 using UnityEngine;
 using UnityEngine.AI;
+using EventType = GenericScripts.EventType;
 
 public class GroundEnemyIdle : StateMachineBehaviour
 {
@@ -23,7 +24,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
 		    _weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
 		    _transform = animator.transform;
 		    _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-		    EventManager.Instance.AddListener(EVENT_TYPE.Loose, (type, sender, o) => _gameEnded = true);
+		    EventManager.Instance.AddListener(EventType.Loose, (type, sender, o) => _gameEnded = true);
 		    _componentsCached = true;
 	    }
     }

@@ -11,8 +11,8 @@ namespace Attack
         [SerializeField] protected Rigidbody rigidbody;
 #pragma warning restore
     
-        [SerializeField] protected float _damage;
-        [SerializeField] protected float _speed;
+        [SerializeField] protected float damage;
+        [SerializeField] protected float speed;
 
         public virtual void StartFlight(Vector3 flightDir)
         {
@@ -26,13 +26,13 @@ namespace Attack
     
         public virtual void OverrideProjectileParams(float damage, float speed)
         {
-            _damage = damage;
-            _speed = speed;
+            this.damage = damage;
+            this.speed = speed;
         }
     
         public virtual void OverrideProjectileParams(float damage)
         {
-            _damage = damage;
+            this.damage = damage;
         }
     
         private void OnDisable()

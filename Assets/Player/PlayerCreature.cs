@@ -5,22 +5,25 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using GenericScripts;
+using EventType = GenericScripts.EventType;
 
 namespace Player
 {
 	public class PlayerCreature : LivingCreature
 	{
 		private PlayerData _playerData;
-		private void Start()
+		public override void Awake()
 		{
+			base.Awake();
 			_playerData = GetComponent<PlayerData>();
 		}
 
 		public override void TakeDamage(float damage)
 		{
-			_health -= damage;
+			Health -= damage;
 			_playerData.State = PlayerState.GetHit;
-			if (_health <= 0)
+			EventManager.Instance.PostNostrification(EventType.PlayerHit, this);
+			if (Health <= 0)
 				Die();
 		}
 	
@@ -29,7 +32,7 @@ namespace Player
 			if (_playerData.State != PlayerState.Dead)
 			{
 				_playerData.State = PlayerState.Dead;
-				EventManager.Instance.PostNostrification(EVENT_TYPE.Loose, this);
+				EventManager.Instance.PostNostrification(EventType.Loose, this);
 			}
 		}
 	}

@@ -4,6 +4,7 @@ using Attack;
 using GameManager;
 using GenericScripts;
 using UnityEngine;
+using EventType = GenericScripts.EventType;
 
 public class FlyingEnemyIdle : StateMachineBehaviour
 {
@@ -22,7 +23,7 @@ public class FlyingEnemyIdle : StateMachineBehaviour
 			_weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
 			_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 			_transform = animator.transform;
-			EventManager.Instance.AddListener(EVENT_TYPE.Loose, (type, sender, o) => _gameEnded = true);
+			EventManager.Instance.AddListener(EventType.Loose, (type, sender, o) => _gameEnded = true);
 			_componentsCached = true;
 		}
 	}

@@ -18,11 +18,11 @@ namespace Enemies
 
         public override void TakeDamage(float damage)
         {
-            if (_health <= 0)
+            if (Health <= 0)
                 return;
-            _health -= damage;
+            Health -= damage;
             _enemyData.State = EnemyState.GetHit;
-            if (_health <= 0)
+            if (Health <= 0)
                 Die();
         }
 

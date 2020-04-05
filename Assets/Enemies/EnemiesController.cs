@@ -5,6 +5,7 @@ using GenericScripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Security.Cryptography;
+using EventType = GenericScripts.EventType;
 
 namespace Enemies
 {
@@ -106,7 +107,7 @@ namespace Enemies
         {
             if (_enemies.Count == 0)
             {
-                EventManager.Instance.PostNostrification(EVENT_TYPE.Win, this);
+                EventManager.Instance.PostNostrification(EventType.Win, this);
                 return true;
             }
             return false;

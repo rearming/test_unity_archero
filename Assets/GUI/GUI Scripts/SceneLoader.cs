@@ -7,8 +7,6 @@ using UnityEngine.UIElements;
 
 public class SceneLoader : MonoBehaviour
 {
-	public Button _button;
-	
 	public void LoadScene(string sceneName)
 	{
 		SceneManager.LoadScene(sceneName);

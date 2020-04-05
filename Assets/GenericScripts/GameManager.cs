@@ -9,10 +9,10 @@ namespace GenericScripts
     {
         void Start()
         {
-            EventManager.Instance.AddListener(EVENT_TYPE.Win, GameWon);
+            EventManager.Instance.AddListener(EventType.Win, GameWon);
         }
         
-        private void GameWon(EVENT_TYPE eventType, Component sender, object param = null)
+        private void GameWon(EventType eventType, Component sender, object param = null)
         {
             Debug.Log("Game Won!");
         }
