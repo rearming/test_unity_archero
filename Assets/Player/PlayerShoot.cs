@@ -2,6 +2,7 @@
 using Enemies;
 using GenericScripts;
 using UnityEngine;
+using UnityEngine.iOS;
 using EventType = GenericScripts.EventType;
 
 namespace Player
@@ -49,7 +50,8 @@ namespace Player
                 _timePast += Time.deltaTime;
                 if (_timePast >= 1f / _shootingWeapon.attacksPerSecond)
                 {
-                    if (!_enemiesController.GetClosestEnemyPosition(out var closestEnemyPos))
+                    if (!_enemiesController.GetClosestEnemyPosition(out var closestEnemyPos)
+                        || !EnemyVisible(ref closestEnemyPos))
                         return;
                     _playerData.State = PlayerState.Shooting;
                     _shootingWeapon.Shoot(closestEnemyPos);
@@ -57,11 +59,17 @@ namespace Player
                 }
             }
         }
+
+        private bool EnemyVisible(ref Vector3 closestEnemyPos)
+        {
+            var origin = transform.position;
+            var ray = new Ray(origin, closestEnemyPos - origin);
+            return Physics.Raycast(ray, out var raycastHit) && raycastHit.collider.CompareTag("Enemy");
+        }
         
         void RotateToEnemy()
         {
-            Vector3 closestEnemyPosition;
-            if (!_enemiesController.GetClosestEnemyPosition(out closestEnemyPosition))
+            if (!_enemiesController.GetClosestEnemyPosition(out var closestEnemyPosition))
                 return;
         
             _transform.localEulerAngles = _playerData.rotator.SmoothLookAt(
