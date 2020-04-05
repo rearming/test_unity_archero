@@ -7,7 +7,7 @@ namespace GenericScripts
 {
 	public class LivingCreature : MonoBehaviour, IMortal
 	{
-		[SerializeField] protected float health; // for inspector
+		[SerializeField] private float health; // for inspector
 		private float _health;
 		public float Health
 		{

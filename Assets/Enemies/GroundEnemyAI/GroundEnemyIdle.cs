@@ -8,7 +8,7 @@ using EventType = GenericScripts.EventType;
 
 public class GroundEnemyIdle : StateMachineBehaviour
 {
-	private ShootingWeapon _weapon;
+	private SingleShootingWeapon _weapon;
 	private float _meleeAttackDistance = 3f;
 	private Transform _transform;
 	private Transform _playerTransform;
@@ -21,7 +21,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
 	    _timePassed = 0f;
 	    if (!_componentsCached)
 	    {
-		    _weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
+		    _weapon = animator.gameObject.GetComponentInChildren<SingleShootingWeapon>();
 		    _transform = animator.transform;
 		    _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		    EventManager.Instance.AddListener(EventType.Loose, (type, sender, o) => _gameEnded = true);
@@ -44,7 +44,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
 			    var distance = animator.GetFloat("Distance");
 			    if (distance <= _meleeAttackDistance)
 				    animator.SetTrigger("Melee Attack");
-			    else if (_timePassed >= 1f / _weapon.attacksPerSecond)
+			    else if (_timePassed >= 1f / _weapon.AttacksPerSecond)
 			    {
 				    animator.SetTrigger("Range Attack");
 				    _timePassed = 0f;

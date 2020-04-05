@@ -12,7 +12,7 @@ namespace Player
         private Transform _transform;
     
         private PlayerData _playerData;
-        private ShootingWeapon _shootingWeapon;
+        private SingleShootingWeapon _singleShootingWeapon;
 
         private bool _stopShooting;
         private float _timePast;
@@ -24,7 +24,7 @@ namespace Player
 
         void Awake()
         {
-            _shootingWeapon = GetComponentInChildren<ShootingWeapon>();
+            _singleShootingWeapon = GetComponentInChildren<SingleShootingWeapon>();
             _playerData = GetComponent<PlayerData>();
             _transform = transform;
 
@@ -48,19 +48,19 @@ namespace Player
             if (_rotationComplete)
             {
                 _timePast += Time.deltaTime;
-                if (_timePast >= 1f / _shootingWeapon.attacksPerSecond)
+                if (_timePast >= 1f / _singleShootingWeapon.AttacksPerSecond)
                 {
                     if (!_enemiesController.GetClosestEnemyPosition(out var closestEnemyPos)
-                        || !EnemyVisible(ref closestEnemyPos))
+                        || !EnemyVisible(closestEnemyPos))
                         return;
                     _playerData.State = PlayerState.Shooting;
-                    _shootingWeapon.Shoot(closestEnemyPos);
+                    _singleShootingWeapon.Shoot(closestEnemyPos);
                     _timePast = 0f;
                 }
             }
         }
 
-        private bool EnemyVisible(ref Vector3 closestEnemyPos)
+        private bool EnemyVisible(Vector3 closestEnemyPos)
         {
             var origin = transform.position;
             var ray = new Ray(origin, closestEnemyPos - origin);

@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class DamageArea : MonoBehaviour, IDamageArea
 {
-    [SerializeField] protected string ignoredTag;
-    [SerializeField] protected float damage; 
+    [SerializeField] private string ignoredTag;
+    [SerializeField] private float damage; 
         
     private void OnCollisionEnter(Collision other)
     {

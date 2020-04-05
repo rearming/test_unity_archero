@@ -391,10 +391,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16673bad8d16c3b46ab744dace113c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideProjectileParams: 1
-  weaponDamage: 2
-  projectileSpeed: 10
-  attacksPerSecond: 1
   projectilePrefab: {fileID: 8902660450392108212, guid: c7f0bc9272561574d8d0f9c95dc16000,
     type: 3}
+  overrideProjectileParams: 1
+  projectileDamage: 1
+  projectileSpeed: 10
   ignoredTag: Enemy
+  attacksPerSecond: 1

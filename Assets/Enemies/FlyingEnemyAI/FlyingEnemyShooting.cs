@@ -7,7 +7,7 @@ using UnityEngine;
 public class FlyingEnemyShooting : StateMachineBehaviour
 {
 	private Transform _playerTransform; 
-	private ShootingWeapon _weapon;
+	private SingleShootingWeapon _weapon;
 
 	private bool _componentsCached;
 	
@@ -15,7 +15,7 @@ public class FlyingEnemyShooting : StateMachineBehaviour
 	{
 		if (!_componentsCached)
 		{
-			_weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
+			_weapon = animator.gameObject.GetComponentInChildren<SingleShootingWeapon>();
 			_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 			_componentsCached = true;
 		}

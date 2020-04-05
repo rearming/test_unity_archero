@@ -8,7 +8,7 @@ public class GroundEnemyRangeAttack : StateMachineBehaviour
 {
     private Transform _playerTransform;
     
-    private ShootingWeapon _weapon;
+    private SingleShootingWeapon _weapon;
     private float _timePassed;
     private bool _shootDone;
 
@@ -19,7 +19,7 @@ public class GroundEnemyRangeAttack : StateMachineBehaviour
         _shootDone = false;
         if (!_componentsCached)
         {
-            _weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
+            _weapon = animator.gameObject.GetComponentInChildren<SingleShootingWeapon>();
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             _componentsCached = true;
         }

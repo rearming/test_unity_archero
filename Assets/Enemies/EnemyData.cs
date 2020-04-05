@@ -16,7 +16,7 @@ namespace Enemies
 	
 	public class EnemyData : MonoBehaviour
 	{
-		[SerializeField] protected int reward;
+		[SerializeField] private int reward;
 
 		private EnemyState _prevState;
 		private EnemyState _state;

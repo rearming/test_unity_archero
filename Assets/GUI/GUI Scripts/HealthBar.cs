@@ -9,9 +9,9 @@ using EventType = GenericScripts.EventType;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] protected float speed;
-    [SerializeField] protected RectTransform fillingTransform;
-    [SerializeField] protected RectTransform rightCorner;
+    [SerializeField] private float speed;
+    [SerializeField] private RectTransform fillingTransform;
+    [SerializeField] private RectTransform rightCorner;
 
     private PlayerCreature _playerCreature;
     private float _stepSize;

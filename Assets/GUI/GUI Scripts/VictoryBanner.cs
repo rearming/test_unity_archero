@@ -7,7 +7,7 @@ using EventType = GenericScripts.EventType;
 
 public class VictoryBanner : MonoBehaviour
 {
-	[SerializeField] protected GameObject victoryBanner;
+	[SerializeField] private GameObject victoryBanner;
 	private void Start()
 	{
 		EventManager.Instance.AddListener(EventType.Win, (type, sender, o) => {victoryBanner.SetActive(true); });

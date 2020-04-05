@@ -2,7 +2,7 @@
 
 namespace Attack
 {
-	public interface IShooter
+	public interface IShootingWeapon
 	{
 		void Shoot(Vector3 targetPos);
 	}

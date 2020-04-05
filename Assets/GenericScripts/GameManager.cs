@@ -7,14 +7,6 @@ namespace GenericScripts
 {
     public class GameManager : MonoBehaviour
     {
-        void Start()
-        {
-            EventManager.Instance.AddListener(EventType.Win, GameWon);
-        }
-        
-        private void GameWon(EventType eventType, Component sender, object param = null)
-        {
-            Debug.Log("Game Won!");
-        }
+        void Start() { }
     }
 }

@@ -7,7 +7,7 @@ namespace Attack
 	{
 		public override void StartFlight(Vector3 flightDir)
 		{
-			rigidbody.AddForce(flightDir * speed);
+			GetComponent<Rigidbody>().AddForce(flightDir * speed);
 		}
 
 		private void OnTriggerEnter(Collider other)

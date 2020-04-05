@@ -8,7 +8,7 @@ namespace Attack
         [HideInInspector]
         public string ignoredTag;
 #pragma warning disable CS0108
-        [SerializeField] protected Rigidbody rigidbody;
+        [SerializeField] private Rigidbody rigidbody;
 #pragma warning restore
     
         [SerializeField] protected float damage;

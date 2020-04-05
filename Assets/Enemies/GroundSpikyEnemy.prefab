@@ -159,13 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16673bad8d16c3b46ab744dace113c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideProjectileParams: 1
-  weaponDamage: 1
-  projectileSpeed: 15
-  attacksPerSecond: 0.7
   projectilePrefab: {fileID: 8902660450392108212, guid: d21a81e49f849db4985241adbea2d962,
     type: 3}
+  overrideProjectileParams: 1
+  projectileDamage: 1
+  projectileSpeed: 15
   ignoredTag: Enemy
+  attacksPerSecond: 0.7
 --- !u!1001 &2170497927289148812
 PrefabInstance:
   m_ObjectHideFlags: 0

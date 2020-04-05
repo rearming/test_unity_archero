@@ -7,8 +7,8 @@ using EventType = GenericScripts.EventType;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] protected GameObject[] showOnPauseObjects;
-    [SerializeField] protected GameObject[] hideOnPauseObjects;
+    [SerializeField] private GameObject[] showOnPauseObjects;
+    [SerializeField] private GameObject[] hideOnPauseObjects;
     
     void Start()
     {

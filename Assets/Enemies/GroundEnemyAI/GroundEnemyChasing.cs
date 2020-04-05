@@ -22,7 +22,7 @@ public class GroundEnemyChasing : StateMachineBehaviour
 		{
 			_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 			_navMeshAgent = animator.gameObject.GetComponent<NavMeshAgent>();
-			_weaponTransform = animator.gameObject.GetComponentInChildren<ShootingWeapon>().gameObject.transform;
+			_weaponTransform = animator.gameObject.GetComponentInChildren<SingleShootingWeapon>().gameObject.transform;
 			_componentsCached = true;
 		}
 		_playerPosition = _playerTransform.position;

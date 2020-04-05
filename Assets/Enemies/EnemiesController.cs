@@ -12,18 +12,18 @@ namespace Enemies
     
     public class EnemiesController : MonoBehaviour
     {
-        [SerializeField] protected Vector3 upperLeftCorner;
-        [SerializeField] protected Vector3 lowerRightCorner;
-        [SerializeField] protected float spawnBoxSize;
+        [SerializeField] private Vector3 upperLeftCorner;
+        [SerializeField] private Vector3 lowerRightCorner;
+        [SerializeField] private float spawnBoxSize;
         private List<Bounds> _spawnBounds = new List<Bounds>();
         
-        [SerializeField] protected GameObject flyingEnemyPrefab;
-        [SerializeField] protected int flyingEnemiesNumber;
-        [SerializeField] protected float flyingEnemySpawnHeight;
+        [SerializeField] private GameObject flyingEnemyPrefab;
+        [SerializeField] private int flyingEnemiesNumber;
+        [SerializeField] private float flyingEnemySpawnHeight;
         
-        [SerializeField] protected GameObject groundEnemyPrefab;
-        [SerializeField] protected int groundEnemiesNumber;
-        [SerializeField] protected float groundEnemySpawnHeight;
+        [SerializeField] private GameObject groundEnemyPrefab;
+        [SerializeField] private int groundEnemiesNumber;
+        [SerializeField] private float groundEnemySpawnHeight;
 
         private int _spawnCellOffset;
 
