@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Attack;
 using GameManager;
+using GenericScripts;
 using UnityEngine;
 
 public class FlyingEnemyIdle : StateMachineBehaviour
@@ -10,6 +11,7 @@ public class FlyingEnemyIdle : StateMachineBehaviour
 	private Transform _playerTransform;
 	private ShootingWeapon _weapon;
 	private float _timePassed;
+	private bool _gameEnded;
 
 	private bool _componentsCached;
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,6 +22,7 @@ public class FlyingEnemyIdle : StateMachineBehaviour
 			_weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
 			_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 			_transform = animator.transform;
+			EventManager.Instance.AddListener(EVENT_TYPE.Loose, (type, sender, o) => _gameEnded = true);
 			_componentsCached = true;
 		}
 	}
@@ -28,7 +31,7 @@ public class FlyingEnemyIdle : StateMachineBehaviour
 	{
 		_transform.LookAt(_playerTransform);
 		_timePassed += Time.deltaTime;
-	    if (_timePassed >= 1 / _weapon.attacksPerSecond)
+	    if (_timePassed >= 1 / _weapon.attacksPerSecond && !_gameEnded)
 	    {
 		    animator.SetTrigger("Shoot");
 		    _timePassed = 0f;

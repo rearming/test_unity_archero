@@ -2788,7 +2788,7 @@ GameObject:
   - component: {fileID: 638551547}
   - component: {fileID: 638551546}
   m_Layer: 0
-  m_Name: ObjectPool
+  m_Name: Object Pool
   m_TagString: ObjectPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4205,7 +4205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2f5a2a517cf014d87d5316146eb54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 50
+  _health: 20
 --- !u!4 &998395988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7405846476849834440, guid: c6308cb7062fac34e8e50600086b12a1,
@@ -4561,7 +4561,7 @@ GameObject:
   - component: {fileID: 1119305115}
   - component: {fileID: 1119305114}
   m_Layer: 0
-  m_Name: Enemy Spawner
+  m_Name: Enemies Controller
   m_TagString: EnemySpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4579,16 +4579,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f195ea19eca9be74e9fb58da1454efb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 2168957499752971956, guid: 83e960328d8c8674d860d25e48b16692, type: 3}
-  - {fileID: 6561284288180807007, guid: 7049c3a57261f1043b86ac8f0a5caa79, type: 3}
-  - {fileID: 2168957499752971956, guid: 83e960328d8c8674d860d25e48b16692, type: 3}
-  - {fileID: 6561284288180807007, guid: 7049c3a57261f1043b86ac8f0a5caa79, type: 3}
-  hardcodedSpawnPositions:
-  - {x: 2, y: 2, z: -4}
-  - {x: -5, y: 5, z: 0}
-  - {x: -3, y: 2, z: 3}
-  - {x: -3, y: 5, z: 3}
+  upperLeftCorner: {x: -12, y: 0, z: 12}
+  lowerRightCorner: {x: 12, y: 0, z: -6}
+  spawnBoxSize: 2
+  flyingEnemyPrefab: {fileID: 6561284288180807007, guid: 7049c3a57261f1043b86ac8f0a5caa79,
+    type: 3}
+  flyingEnemiesNumber: 3
+  flyingEnemySpawnHeight: 5
+  groundEnemyPrefab: {fileID: 2168957499752971956, guid: 83e960328d8c8674d860d25e48b16692,
+    type: 3}
+  groundEnemiesNumber: 5
+  groundEnemySpawnHeight: 2
 --- !u!4 &1119305115
 Transform:
   m_ObjectHideFlags: 0
@@ -9218,6 +9219,11 @@ PrefabInstance:
     - target: {fileID: 1686021177304871604, guid: ebee340de387f334f9ac44e044abd8fb,
         type: 3}
       propertyPath: m_Name
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686021177304871604, guid: ebee340de387f334f9ac44e044abd8fb,
+        type: 3}
+      propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 1686021177305034388, guid: ebee340de387f334f9ac44e044abd8fb,

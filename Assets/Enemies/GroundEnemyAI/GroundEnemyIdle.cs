@@ -8,10 +8,11 @@ using UnityEngine.AI;
 public class GroundEnemyIdle : StateMachineBehaviour
 {
 	private ShootingWeapon _weapon;
-	[SerializeField] private float _meleeAttackDistance;
+	private float _meleeAttackDistance = 3f;
 	private Transform _transform;
 	private Transform _playerTransform;
     private float _timePassed;
+    private bool _gameEnded;
 
     private bool _componentsCached;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,6 +23,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
 		    _weapon = animator.gameObject.GetComponentInChildren<ShootingWeapon>();
 		    _transform = animator.transform;
 		    _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+		    EventManager.Instance.AddListener(EVENT_TYPE.Loose, (type, sender, o) => _gameEnded = true);
 		    _componentsCached = true;
 	    }
     }
@@ -35,7 +37,7 @@ public class GroundEnemyIdle : StateMachineBehaviour
 	    {
 		    if (!hitInfo.collider.gameObject.CompareTag("Player") && !hitInfo.collider.isTrigger)
 			    animator.SetBool("IsChasing", true);
-		    else
+		    else if (!_gameEnded)
 		    {
 			    _timePassed += Time.deltaTime;
 			    var distance = animator.GetFloat("Distance");

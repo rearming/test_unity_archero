@@ -26,7 +26,11 @@ namespace Player
 	
 		public override void Die()
 		{
-			_playerData.State = PlayerState.Dead;
+			if (_playerData.State != PlayerState.Dead)
+			{
+				_playerData.State = PlayerState.Dead;
+				EventManager.Instance.PostNostrification(EVENT_TYPE.Loose, this);
+			}
 		}
 	}
 }

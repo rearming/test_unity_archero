@@ -18,7 +18,7 @@ namespace Player
         private bool _rotationComplete;
         private float _rotationLerpValue;
     
-        private EnemySpawner _enemySpawner;
+        private EnemiesController _enemiesController;
 
         void Awake()
         {
@@ -26,7 +26,7 @@ namespace Player
             _playerData = GetComponent<PlayerData>();
             _transform = transform;
 
-            _enemySpawner = FindObjectOfType<EnemySpawner>();
+            _enemiesController = FindObjectOfType<EnemiesController>();
             EventManager.Instance.AddListener(EVENT_TYPE.Win, (eventType, sender, o) =>
             {
                 _stopShooting = eventType == EVENT_TYPE.Win;
@@ -38,7 +38,7 @@ namespace Player
             if (_playerData.State == PlayerState.Dead || _stopShooting)
                 return;
             
-            if (_playerData.State == PlayerState.Moving || _enemySpawner.ClosestEnemyChanged())
+            if (_playerData.State == PlayerState.Moving || _enemiesController.ClosestEnemyChanged())
                 _rotationComplete = false;
             if (!_rotationComplete && _playerData.State == PlayerState.Idle)
                 RotateToEnemy();
@@ -48,7 +48,7 @@ namespace Player
                 _timePast += Time.deltaTime;
                 if (_timePast >= 1f / _shootingWeapon.attacksPerSecond)
                 {
-                    if (!_enemySpawner.GetClosestEnemyPosition(out var closestEnemyPos))
+                    if (!_enemiesController.GetClosestEnemyPosition(out var closestEnemyPos))
                         return;
                     _playerData.State = PlayerState.Shooting;
                     _shootingWeapon.Shoot(closestEnemyPos);
@@ -60,7 +60,7 @@ namespace Player
         void RotateToEnemy()
         {
             Vector3 closestEnemyPosition;
-            if (!_enemySpawner.GetClosestEnemyPosition(out closestEnemyPosition))
+            if (!_enemiesController.GetClosestEnemyPosition(out closestEnemyPosition))
                 return;
         
             _transform.localEulerAngles = _playerData.rotator.SmoothLookAt(

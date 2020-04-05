@@ -13,7 +13,7 @@ namespace Enemies
         private void Start()
         {
             _enemyData = GetComponent<EnemyData>();
-            _gameData = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameData>();
+            _gameData = FindObjectOfType<GameData>();
         }
 
         public override void TakeDamage(float damage)
