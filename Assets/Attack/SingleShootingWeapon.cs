@@ -17,11 +17,13 @@ namespace Attack
 
         protected override void OverrideProjectileParams()
         {
-            OverridenProjectilePrefab = projectilePrefab;
+            OverridenProjectilePrefab = Instantiate(projectilePrefab);
+            OverridenProjectilePrefab.name += this;
             var projectileComponent = OverridenProjectilePrefab.GetComponent<GenericProjectile>();
             projectileComponent.ignoredTag = ignoredTag;
             if (overrideProjectileParams)
                 projectileComponent.OverrideProjectileParams(projectileDamage, projectileSpeed);
+            ObjectPool.Instance.ReturnGameObjectToPool(OverridenProjectilePrefab);
         }
 
         protected override GameObject GetOverridenProjectileInstance()

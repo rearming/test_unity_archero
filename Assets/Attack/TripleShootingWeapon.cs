@@ -20,11 +20,13 @@ public sealed class TripleShootingWeapon : GenericShootingWeapon
 	
 	protected override void OverrideProjectileParams()
 	{
-		OverridenProjectilePrefab = projectilePrefab;
+		OverridenProjectilePrefab = Instantiate(projectilePrefab);
+		OverridenProjectilePrefab.name += this;
 		var projectileComponent = OverridenProjectilePrefab.GetComponent<GenericProjectile>();
 		projectileComponent.ignoredTag = ignoredTag;
 		if (overrideProjectileParams)
 			projectileComponent.OverrideProjectileParams(projectileDamage, projectileSpeed);
+		ObjectPool.Instance.ReturnGameObjectToPool(OverridenProjectilePrefab);
 	}
 
 	protected override GameObject GetOverridenProjectileInstance()
@@ -37,18 +39,22 @@ public sealed class TripleShootingWeapon : GenericShootingWeapon
 		var projectileObjectCenter = GetOverridenProjectileInstance();
 		var projectileObjectLeft = GetOverridenProjectileInstance();
 		var projectileObjectRight = GetOverridenProjectileInstance();
-		
-		var targetDir = targetPos - projectileObjectCenter.transform.position;
-		var targetDirLeft = Quaternion.Euler(0, -angle, 0);
-		var targetDirRight = Quaternion.Euler(0, angle, 0);
 
 		var originPos = WeaponTransform.position;
 		projectileObjectCenter.transform.position = originPos;
 		projectileObjectLeft.transform.position = originPos;
 		projectileObjectRight.transform.position = originPos;
 		
-		projectileObjectCenter.GetComponent<GenericProjectile>().StartFlight(targetDir);
-		projectileObjectLeft.GetComponent<GenericProjectile>().StartFlight(targetDir);
-		projectileObjectRight.GetComponent<GenericProjectile>().StartFlight(targetDir);
+		var targetDirCenter = targetPos - projectileObjectCenter.transform.position;
+		var targetDirLeft = Quaternion.Euler(0, -angle, 0) * targetDirCenter;
+		var targetDirRight = Quaternion.Euler(0, angle, 0) * targetDirCenter;
+		
+		Debug.DrawRay(originPos, targetDirLeft, Color.blue, 1f);
+		Debug.DrawRay(originPos, targetDirCenter, Color.red, 1f);
+		Debug.DrawRay(originPos, targetDirRight, Color.green, 1f);
+
+		projectileObjectCenter.GetComponent<GenericProjectile>().StartFlight(targetDirCenter);
+		projectileObjectLeft.GetComponent<GenericProjectile>().StartFlight(targetDirLeft);
+		projectileObjectRight.GetComponent<GenericProjectile>().StartFlight(targetDirRight);
 	}
 }

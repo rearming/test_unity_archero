@@ -1,4 +1,5 @@
-﻿using GenericScripts;
+﻿using System.Collections;
+using GenericScripts;
 using UnityEngine;
 
 namespace Attack

@@ -1,4 +1,5 @@
-﻿using GenericScripts;
+﻿using System.Collections;
+using GenericScripts;
 using UnityEngine;
 
 namespace Attack
@@ -8,6 +9,13 @@ namespace Attack
 		public override void StartFlight(Vector3 flightDir)
 		{
 			GetComponent<Rigidbody>().AddForce(flightDir * speed);
+			StartCoroutine(nameof(LateDestruct));
+		}
+
+		private IEnumerator LateDestruct()
+		{
+			yield return new WaitForSeconds(5f);
+			ObjectPool.Instance.ReturnGameObjectToPool(gameObject);
 		}
 
 		private void OnTriggerEnter(Collider other)

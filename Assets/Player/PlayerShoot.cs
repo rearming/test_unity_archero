@@ -3,6 +3,7 @@ using Enemies;
 using GenericScripts;
 using UnityEngine;
 using UnityEngine.iOS;
+using UnityScript.Steps;
 using EventType = GenericScripts.EventType;
 
 namespace Player
@@ -12,7 +13,10 @@ namespace Player
         private Transform _transform;
     
         private PlayerData _playerData;
+        
         private SingleShootingWeapon _singleShootingWeapon;
+        private TripleShootingWeapon _tripleShootingWeapon;
+        private GenericShootingWeapon _currentShootingWeapon;
 
         private bool _stopShooting;
         private float _timePast;
@@ -25,6 +29,9 @@ namespace Player
         void Awake()
         {
             _singleShootingWeapon = GetComponentInChildren<SingleShootingWeapon>();
+            _tripleShootingWeapon = GetComponentInChildren<TripleShootingWeapon>();
+            _currentShootingWeapon = _singleShootingWeapon;
+            
             _playerData = GetComponent<PlayerData>();
             _transform = transform;
 
@@ -34,7 +41,7 @@ namespace Player
                 _stopShooting = eventType == EventType.Win;
             });
         }
-
+        
         void Update()
         {
             if (_playerData.State == PlayerState.Dead || _stopShooting)
@@ -45,6 +52,8 @@ namespace Player
             if (!_rotationComplete && _playerData.State == PlayerState.Idle)
                 RotateToEnemy();
         
+            SwitchWeapon();
+            
             if (_rotationComplete)
             {
                 _timePast += Time.deltaTime;
@@ -54,10 +63,18 @@ namespace Player
                         || !EnemyVisible(closestEnemyPos))
                         return;
                     _playerData.State = PlayerState.Shooting;
-                    _singleShootingWeapon.Shoot(closestEnemyPos);
+                    _currentShootingWeapon.Shoot(closestEnemyPos);
                     _timePast = 0f;
                 }
             }
+        }
+
+        void SwitchWeapon()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                _currentShootingWeapon = _singleShootingWeapon;
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+                _currentShootingWeapon = _tripleShootingWeapon;
         }
 
         private bool EnemyVisible(Vector3 closestEnemyPos)

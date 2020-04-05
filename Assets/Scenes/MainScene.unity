@@ -13721,6 +13721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2094663060}
   - component: {fileID: 2094663061}
+  - component: {fileID: 2094663062}
   m_Layer: 8
   m_Name: Shooting Weapon
   m_TagString: Player
@@ -13761,6 +13762,26 @@ MonoBehaviour:
   projectileSpeed: 10
   ignoredTag: Player
   attacksPerSecond: 1.5
+--- !u!114 &2094663062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094663059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02b5dbfbbb47a7469564b3a3e219797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8902660450392108212, guid: 17d1062009bcc68458fc239194dd452f,
+    type: 3}
+  overrideProjectileParams: 1
+  projectileDamage: 0.5
+  projectileSpeed: 9
+  ignoredTag: Player
+  attacksPerSecond: 0.5
+  angle: 30
 --- !u!1001 &2112488230
 PrefabInstance:
   m_ObjectHideFlags: 0
