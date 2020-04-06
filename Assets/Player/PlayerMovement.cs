@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GenericScripts;
+using UnityEngine;
+using EventType = GenericScripts.EventType;
 
 namespace Player
 {
@@ -7,6 +9,8 @@ namespace Player
         private Rigidbody _rigidbody;
         private Transform _transform;
 
+        private FloatingJoystick _joystick;
+        private bool _isJoystick;
         private Vector3 _currMovementDir;
         private Vector3 _prevMovementDir;
 
@@ -20,6 +24,9 @@ namespace Player
             _rigidbody = GetComponent<Rigidbody>();
             _transform = transform;
             _playerData = GetComponent<PlayerData>();
+            _joystick = FindObjectOfType<FloatingJoystick>();
+            EventManager.Instance.AddListener(EventType.JoystickOn, (type, sender, o) => { _isJoystick = true; });
+            EventManager.Instance.AddListener(EventType.JoystickOff, (type, sender, o) => { _isJoystick = false; });
         }
     
         void Update()
@@ -62,8 +69,16 @@ namespace Player
     
         void UpdateMovementDir()
         {
-            _currMovementDir.x = Input.GetAxis("Horizontal");
-            _currMovementDir.z = Input.GetAxis("Vertical");
+            if (_isJoystick)
+            {
+                _currMovementDir.x = _joystick.Horizontal;
+                _currMovementDir.z = _joystick.Vertical;
+            }
+            else
+            {
+                _currMovementDir.x = Input.GetAxis("Horizontal");
+                _currMovementDir.z = Input.GetAxis("Vertical");
+            }
         }
     }
 }

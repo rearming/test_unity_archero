@@ -6,15 +6,13 @@ using UnityEngine;
 
 public sealed class TripleShootingWeapon : GenericShootingWeapon
 {
+	public override string WeaponType => nameof(TripleShootingWeapon);
 	
-    [SerializeField] private float attacksPerSecond;
-    public float AttacksPerSecond { get; private set; }
-    [SerializeField] private float angle;
+	[SerializeField] private float angle;
     
 	protected override void Start()
     {
 	    base.Start();
-	    AttacksPerSecond = attacksPerSecond;
 	    OverrideProjectileParams();
     }
 	
@@ -48,10 +46,6 @@ public sealed class TripleShootingWeapon : GenericShootingWeapon
 		var targetDirCenter = targetPos - projectileObjectCenter.transform.position;
 		var targetDirLeft = Quaternion.Euler(0, -angle, 0) * targetDirCenter;
 		var targetDirRight = Quaternion.Euler(0, angle, 0) * targetDirCenter;
-		
-		Debug.DrawRay(originPos, targetDirLeft, Color.blue, 1f);
-		Debug.DrawRay(originPos, targetDirCenter, Color.red, 1f);
-		Debug.DrawRay(originPos, targetDirRight, Color.green, 1f);
 
 		projectileObjectCenter.GetComponent<GenericProjectile>().StartFlight(targetDirCenter);
 		projectileObjectLeft.GetComponent<GenericProjectile>().StartFlight(targetDirLeft);

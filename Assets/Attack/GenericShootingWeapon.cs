@@ -6,13 +6,17 @@ using UnityEngine;
 
 public class GenericShootingWeapon : MonoBehaviour, IShootingWeapon
 {
+    public virtual string WeaponType => null;
+    
     [SerializeField] protected GameObject projectilePrefab;
     
     protected GameObject OverridenProjectilePrefab;
     [SerializeField] protected bool overrideProjectileParams;
     [SerializeField] protected float projectileDamage;
     [SerializeField] protected float projectileSpeed;
-    
+    [SerializeField] private float attacksPerSecond;
+    public float AttacksPerSecond { get; private set; }
+
     [SerializeField] protected string ignoredTag;
     
     protected Transform WeaponTransform;
@@ -20,6 +24,7 @@ public class GenericShootingWeapon : MonoBehaviour, IShootingWeapon
     protected virtual void Start()
     {
         WeaponTransform = GetComponent<Transform>();
+        AttacksPerSecond = attacksPerSecond;
     }
 
     protected virtual void OverrideProjectileParams() { }

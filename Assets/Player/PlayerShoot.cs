@@ -1,9 +1,12 @@
-﻿using Attack;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using Attack;
 using Enemies;
 using GenericScripts;
 using UnityEngine;
 using UnityEngine.iOS;
 using UnityScript.Steps;
+using Debug = UnityEngine.Debug;
 using EventType = GenericScripts.EventType;
 
 namespace Player
@@ -14,8 +17,8 @@ namespace Player
     
         private PlayerData _playerData;
         
-        private SingleShootingWeapon _singleShootingWeapon;
-        private TripleShootingWeapon _tripleShootingWeapon;
+        [SerializeField] private GenericShootingWeapon[] weaponsObjects;
+        private Dictionary<string, GenericShootingWeapon> _weapons = new Dictionary<string, GenericShootingWeapon>();
         private GenericShootingWeapon _currentShootingWeapon;
 
         private bool _stopShooting;
@@ -28,18 +31,31 @@ namespace Player
 
         void Awake()
         {
-            _singleShootingWeapon = GetComponentInChildren<SingleShootingWeapon>();
-            _tripleShootingWeapon = GetComponentInChildren<TripleShootingWeapon>();
-            _currentShootingWeapon = _singleShootingWeapon;
-            
             _playerData = GetComponent<PlayerData>();
             _transform = transform;
 
             _enemiesController = FindObjectOfType<EnemiesController>();
+            AddWeapons();
+            SubscribeOnEvents();
+        }
+
+        private void SubscribeOnEvents()
+        {
             EventManager.Instance.AddListener(EventType.Win, (eventType, sender, o) =>
+                { _stopShooting = eventType == EventType.Win; });
+            EventManager.Instance.AddListener(EventType.WeaponChanged, (type, sender, param) =>
             {
-                _stopShooting = eventType == EventType.Win;
+                var weaponName = param as string;
+                if (weaponName == null || !_weapons.TryGetValue(weaponName, out _currentShootingWeapon))
+                    Debug.Log($"Unknown weapon name {weaponName}!");
             });
+        }
+        
+        private void AddWeapons()
+        {
+            _currentShootingWeapon = weaponsObjects[0]; // default weapon
+            foreach (var weaponsObject in weaponsObjects)
+                _weapons.Add(weaponsObject.WeaponType, weaponsObject);
         }
         
         void Update()
@@ -51,13 +67,11 @@ namespace Player
                 _rotationComplete = false;
             if (!_rotationComplete && _playerData.State == PlayerState.Idle)
                 RotateToEnemy();
-        
-            SwitchWeapon();
-            
+
             if (_rotationComplete)
             {
                 _timePast += Time.deltaTime;
-                if (_timePast >= 1f / _singleShootingWeapon.AttacksPerSecond)
+                if (_timePast >= 1f / _currentShootingWeapon.AttacksPerSecond)
                 {
                     if (!_enemiesController.GetClosestEnemyPosition(out var closestEnemyPos)
                         || !EnemyVisible(closestEnemyPos))
@@ -67,14 +81,6 @@ namespace Player
                     _timePast = 0f;
                 }
             }
-        }
-
-        void SwitchWeapon()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                _currentShootingWeapon = _singleShootingWeapon;
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-                _currentShootingWeapon = _tripleShootingWeapon;
         }
 
         private bool EnemyVisible(Vector3 closestEnemyPos)

@@ -25,15 +25,15 @@ namespace Attack
             Debug.Log($"DealDamage() on {gameObject} not implemented!");
         }
     
-        public virtual void OverrideProjectileParams(float damage, float speed)
+        public virtual void OverrideProjectileParams(float newDamage, float newSpeed)
         {
-            this.damage = damage;
-            this.speed = speed;
+            this.damage = newDamage;
+            this.speed = newSpeed;
         }
     
-        public virtual void OverrideProjectileParams(float damage)
+        public virtual void OverrideProjectileParams(float newDamage)
         {
-            this.damage = damage;
+            this.damage = newDamage;
         }
     
         private void OnDisable()

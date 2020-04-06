@@ -6,6 +6,8 @@ namespace Attack
 {
 	public class StoneProjectile : GenericProjectile
 	{
+		private const float SecondsBeforeDestroy = 5f;
+		
 		public override void StartFlight(Vector3 flightDir)
 		{
 			GetComponent<Rigidbody>().AddForce(flightDir * speed);
@@ -14,7 +16,7 @@ namespace Attack
 
 		private IEnumerator LateDestruct()
 		{
-			yield return new WaitForSeconds(5f);
+			yield return new WaitForSeconds(SecondsBeforeDestroy);
 			ObjectPool.Instance.ReturnGameObjectToPool(gameObject);
 		}
 

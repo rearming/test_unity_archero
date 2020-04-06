@@ -5,13 +5,11 @@ namespace Attack
 {
     public sealed class SingleShootingWeapon : GenericShootingWeapon
     {
-        [SerializeField] private float attacksPerSecond;
-        public float AttacksPerSecond { get; private set; }
-        
+        public override string WeaponType => nameof(SingleShootingWeapon);
+
         protected override void Start()
         {
             base.Start();
-            AttacksPerSecond = attacksPerSecond;
             OverrideProjectileParams();
         }
 
