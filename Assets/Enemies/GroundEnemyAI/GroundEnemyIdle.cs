@@ -9,7 +9,7 @@ using EventType = GenericScripts.EventType;
 public class GroundEnemyIdle : StateMachineBehaviour
 {
 	private SingleShootingWeapon _weapon;
-	private float _meleeAttackDistance = 3f;
+	private float _meleeAttackDistance = 5f;
 	private Transform _transform;
 	private Transform _playerTransform;
     private float _timePassed;

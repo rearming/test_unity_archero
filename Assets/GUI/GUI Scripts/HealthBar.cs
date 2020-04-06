@@ -15,10 +15,13 @@ public class HealthBar : MonoBehaviour
 
     private PlayerCreature _playerCreature;
     private float _stepSize;
+    private float _minFillingPositionX;
+    
     private void Start()
     {
         _playerCreature = FindObjectOfType<PlayerCreature>();
         _stepSize = fillingTransform.sizeDelta.x / _playerCreature.Health;
+        _minFillingPositionX = -(fillingTransform.sizeDelta.x / 2);
         EventManager.Instance.AddListener(EventType.PlayerHit, (type, sender, param) =>
         {
             UpdateHealthBar(_stepSize * _playerCreature.DeltaHealth);
@@ -30,10 +33,12 @@ public class HealthBar : MonoBehaviour
         var sizeDelta = fillingTransform.sizeDelta;
         var fillingPosition = fillingTransform.anchoredPosition;
         var cornerPosition = rightCorner.anchoredPosition;
-            
+        
         sizeDelta.x += updateSize;
         fillingPosition.x += updateSize / 2;
-
+        sizeDelta.x = Mathf.Clamp(sizeDelta.x,0f, Mathf.Infinity);
+        fillingPosition.x = Mathf.Clamp(fillingPosition.x, _minFillingPositionX, Mathf.Infinity);
+        
         fillingTransform.sizeDelta = sizeDelta;
         fillingTransform.anchoredPosition = fillingPosition;
         cornerPosition.x = fillingTransform.rect.xMax;
