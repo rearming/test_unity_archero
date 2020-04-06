@@ -1,21 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerPositionInfoSetter : MonoBehaviour
+namespace Enemies.EnemyAIUtils
 {
-    private Transform _playerTransform;
-    private Animator _animator;
-    
-    void Start()
+    public class PlayerPositionInfoSetter : MonoBehaviour
     {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        _animator = GetComponent<Animator>();
-    }
+        private Transform _playerTransform;
+        private Animator _animator;
     
-    void Update()
-    {
-        _animator.SetFloat("Distance", 
-            Vector3.Distance(_animator.transform.position, _playerTransform.position));   
+        void Start()
+        {
+            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            _animator = GetComponent<Animator>();
+        }
+    
+        void Update()
+        {
+            _animator.SetFloat("Distance", 
+                Vector3.Distance(_animator.transform.position, _playerTransform.position));   
+        }
     }
 }

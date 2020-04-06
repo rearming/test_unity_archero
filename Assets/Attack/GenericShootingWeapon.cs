@@ -1,38 +1,37 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Attack;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GenericShootingWeapon : MonoBehaviour, IShootingWeapon
+namespace Attack
 {
-    public virtual string WeaponType => null;
-    
-    [SerializeField] protected GameObject projectilePrefab;
-    
-    protected GameObject OverridenProjectilePrefab;
-    [SerializeField] protected bool overrideProjectileParams;
-    [SerializeField] protected float projectileDamage;
-    [SerializeField] protected float projectileSpeed;
-    [SerializeField] private float attacksPerSecond;
-    public float AttacksPerSecond { get; private set; }
-
-    [SerializeField] protected string ignoredTag;
-    
-    protected Transform WeaponTransform;
-
-    protected virtual void Start()
+    public class GenericShootingWeapon : MonoBehaviour, IShootingWeapon
     {
-        WeaponTransform = GetComponent<Transform>();
-        AttacksPerSecond = attacksPerSecond;
-    }
-
-    protected virtual void OverrideProjectileParams() { }
+        public virtual string WeaponType => null;
     
-    protected virtual GameObject GetOverridenProjectileInstance() => null;
+        [SerializeField] protected GameObject projectilePrefab;
+    
+        protected GameObject OverridenProjectilePrefab;
+        [SerializeField] protected bool overrideProjectileParams;
+        [SerializeField] protected float projectileDamage;
+        [SerializeField] protected float projectileSpeed;
+        [SerializeField] private float attacksPerSecond;
+        public float AttacksPerSecond { get; private set; }
 
-    public virtual void Shoot(Vector3 targetPos)
-    {
-        Debug.Log($"{nameof(Shoot)} is not implemented in {name}!");
+        [SerializeField] protected string ignoredTag;
+    
+        protected Transform WeaponTransform;
+
+        protected virtual void Start()
+        {
+            WeaponTransform = GetComponent<Transform>();
+            AttacksPerSecond = attacksPerSecond;
+        }
+
+        protected virtual void OverrideProjectileParams() { }
+    
+        protected virtual GameObject GetOverridenProjectileInstance() => null;
+
+        public virtual void Shoot(Vector3 targetPos)
+        {
+            Debug.Log($"{nameof(Shoot)} is not implemented in {name}!");
+        }
     }
 }
